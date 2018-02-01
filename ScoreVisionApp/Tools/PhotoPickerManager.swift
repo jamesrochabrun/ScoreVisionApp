@@ -67,7 +67,6 @@ extension PhotoPickerManager: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         guard let asset = info[UIImagePickerControllerPHAsset] as? PHAsset else { return }
-        
         let options = PHImageRequestOptions()
         options.version = .current
         options.resizeMode = .fast

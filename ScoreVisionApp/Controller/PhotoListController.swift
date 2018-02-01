@@ -21,7 +21,13 @@ final class PhotoListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+    
+        
+        
+        
     }
+    
     
     @IBAction func launchLibrary(_ sender: UIButton) {
         photoPickerManager.presentPhotoPicker(from: CameraSourceType.librarySource, animated: true)
@@ -31,7 +37,6 @@ final class PhotoListController: UIViewController {
         photoPickerManager.presentPhotoPicker(from: CameraSourceType.cameraSource, animated: true)
     }
 }
-
 
 
 extension PhotoListController: PhotoPickerManagerDelegate {
