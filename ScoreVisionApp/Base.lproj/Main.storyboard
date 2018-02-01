@@ -54,15 +54,27 @@
                                     <constraint firstAttribute="trailing" secondItem="NhO-BD-Ut0" secondAttribute="trailing" id="idQ-px-UPw"/>
                                 </constraints>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v3n-IG-3wC">
+                                <rect key="frame" x="87" y="20" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="S1S-8F-kue"/>
+                                    <constraint firstAttribute="width" constant="200" id="Y7C-Jl-agS"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="v3n-IG-3wC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8rO-ej-byd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LSx-Fm-Fq2" secondAttribute="bottom" id="eQV-OI-rWu"/>
                             <constraint firstItem="LSx-Fm-Fq2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nJP-6j-6Ln"/>
+                            <constraint firstItem="v3n-IG-3wC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s7S-Gi-mkl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LSx-Fm-Fq2" secondAttribute="trailing" id="zcO-ZL-ALi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="v3n-IG-3wC" id="NzM-RF-wg9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

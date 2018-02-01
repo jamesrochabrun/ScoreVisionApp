@@ -16,6 +16,9 @@ final class PhotoListController: UIViewController {
         return manager
     }()
     
+    @IBOutlet weak var photoImageView: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -36,6 +39,7 @@ extension PhotoListController: PhotoPickerManagerDelegate {
     func manager(_ manager: PhotoPickerManager, didPickImage image: UIImage) {
 
         // here is our image
+        photoImageView.image = image
         manager.dismissPhotoPicker(animated: true) {
             print("dismiss")
         }
