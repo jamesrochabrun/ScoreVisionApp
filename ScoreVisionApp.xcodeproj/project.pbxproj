@@ -16,6 +16,11 @@
 		0907A8EF2022DBA500E18BFA /* ScoreVisionAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8EE2022DBA500E18BFA /* ScoreVisionAppTests.swift */; };
 		0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */; };
 		0913CBDA2023834200C19C95 /* CSCProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CBD92023834200C19C95 /* CSCProvider.swift */; };
+		092C13532023D8BC009F85B3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13522023D8BC009F85B3 /* Theme.swift */; };
+		092C13562023D98C009F85B3 /* SortDescriptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */; };
+		092C13582023DA36009F85B3 /* PredicateThemeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */; };
+		DD45B92729D73C04A0EEDB22 /* Pods_ScoreVisionAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */; };
+		E2C01D32339C6945496C1FB6 /* Pods_ScoreVisionApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +47,15 @@
 		0907A8F02022DBA500E18BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerManager.swift; sourceTree = "<group>"; };
 		0913CBD92023834200C19C95 /* CSCProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCProvider.swift; sourceTree = "<group>"; };
+		092C13522023D8BC009F85B3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDescriptorProvider.swift; sourceTree = "<group>"; };
+		092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateThemeProvider.swift; sourceTree = "<group>"; };
+		1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BAAF1EB20F21AD1F4331045 /* Pods-ScoreVisionAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoreVisionAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScoreVisionAppTests/Pods-ScoreVisionAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B98A65E42F07634A9378DA3B /* Pods-ScoreVisionApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoreVisionApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScoreVisionApp/Pods-ScoreVisionApp.release.xcconfig"; sourceTree = "<group>"; };
+		C60A4F70B1F0DEC579668664 /* Pods-ScoreVisionApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoreVisionApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScoreVisionApp/Pods-ScoreVisionApp.debug.xcconfig"; sourceTree = "<group>"; };
+		DC33EF9D4F5D108C4C865411 /* Pods-ScoreVisionAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoreVisionAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScoreVisionAppTests/Pods-ScoreVisionAppTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2C01D32339C6945496C1FB6 /* Pods_ScoreVisionApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,18 +71,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD45B92729D73C04A0EEDB22 /* Pods_ScoreVisionAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03A99B48C560F427FF299AB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */,
+				8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0907A8CA2022DBA500E18BFA = {
 			isa = PBXGroup;
 			children = (
 				0907A8D52022DBA500E18BFA /* ScoreVisionApp */,
 				0907A8ED2022DBA500E18BFA /* ScoreVisionAppTests */,
 				0907A8D42022DBA500E18BFA /* Products */,
+				9C7D1DB9D03173608F1BCDB1 /* Pods */,
+				03A99B48C560F427FF299AB0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,10 +158,32 @@
 		0907A8FC2022DC8A00E18BFA /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				092C13512023D89D009F85B3 /* CSCHelpers */,
 				0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */,
 				0913CBD92023834200C19C95 /* CSCProvider.swift */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		092C13512023D89D009F85B3 /* CSCHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				092C13522023D8BC009F85B3 /* Theme.swift */,
+				092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */,
+				092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */,
+			);
+			path = CSCHelpers;
+			sourceTree = "<group>";
+		};
+		9C7D1DB9D03173608F1BCDB1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C60A4F70B1F0DEC579668664 /* Pods-ScoreVisionApp.debug.xcconfig */,
+				B98A65E42F07634A9378DA3B /* Pods-ScoreVisionApp.release.xcconfig */,
+				3BAAF1EB20F21AD1F4331045 /* Pods-ScoreVisionAppTests.debug.xcconfig */,
+				DC33EF9D4F5D108C4C865411 /* Pods-ScoreVisionAppTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,9 +193,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0907A8F32022DBA500E18BFA /* Build configuration list for PBXNativeTarget "ScoreVisionApp" */;
 			buildPhases = (
+				09FE6A5A9D6084BC2D07CD92 /* [CP] Check Pods Manifest.lock */,
 				0907A8CF2022DBA500E18BFA /* Sources */,
 				0907A8D02022DBA500E18BFA /* Frameworks */,
 				0907A8D12022DBA500E18BFA /* Resources */,
+				6EA1FC1ABB840BBCC2B979C5 /* [CP] Embed Pods Frameworks */,
+				CBCC67973762EF3B9BB8557B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,9 +213,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0907A8F62022DBA500E18BFA /* Build configuration list for PBXNativeTarget "ScoreVisionAppTests" */;
 			buildPhases = (
+				191AECD2E422CA30799813AD /* [CP] Check Pods Manifest.lock */,
 				0907A8E62022DBA500E18BFA /* Sources */,
 				0907A8E72022DBA500E18BFA /* Frameworks */,
 				0907A8E82022DBA500E18BFA /* Resources */,
+				A5D0E3A3CC0E369C7218C93A /* [CP] Embed Pods Frameworks */,
+				81C086B058A051CBABC49558 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -235,6 +290,108 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09FE6A5A9D6084BC2D07CD92 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScoreVisionApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		191AECD2E422CA30799813AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScoreVisionAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6EA1FC1ABB840BBCC2B979C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ScoreVisionApp/Pods-ScoreVisionApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScoreVisionApp/Pods-ScoreVisionApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81C086B058A051CBABC49558 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScoreVisionAppTests/Pods-ScoreVisionAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5D0E3A3CC0E369C7218C93A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScoreVisionAppTests/Pods-ScoreVisionAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBCC67973762EF3B9BB8557B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScoreVisionApp/Pods-ScoreVisionApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0907A8CF2022DBA500E18BFA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -243,7 +400,10 @@
 				0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */,
 				0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */,
 				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,
+				092C13532023D8BC009F85B3 /* Theme.swift in Sources */,
 				0913CBDA2023834200C19C95 /* CSCProvider.swift in Sources */,
+				092C13562023D98C009F85B3 /* SortDescriptorProvider.swift in Sources */,
+				092C13582023DA36009F85B3 /* PredicateThemeProvider.swift in Sources */,
 				0907A8DF2022DBA500E18BFA /* ScoreVisionApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +555,7 @@
 		};
 		0907A8F42022DBA500E18BFA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C60A4F70B1F0DEC579668664 /* Pods-ScoreVisionApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -410,6 +571,7 @@
 		};
 		0907A8F52022DBA500E18BFA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B98A65E42F07634A9378DA3B /* Pods-ScoreVisionApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -425,6 +587,7 @@
 		};
 		0907A8F72022DBA500E18BFA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BAAF1EB20F21AD1F4331045 /* Pods-ScoreVisionAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -442,6 +605,7 @@
 		};
 		0907A8F82022DBA500E18BFA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC33EF9D4F5D108C4C865411 /* Pods-ScoreVisionAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
