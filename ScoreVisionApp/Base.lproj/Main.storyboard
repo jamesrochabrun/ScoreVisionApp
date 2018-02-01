@@ -1,19 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Photo List Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PhotoListController" customModule="ScoreVisionApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LSx-Fm-Fq2">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NA1-iR-Fbj">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                                        <color key="backgroundColor" red="0.40631710487473061" green="0.91298681497573853" blue="0.69687229299459463" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Camera">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="launchCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xUR-IY-bp4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NhO-BD-Ut0">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
+                                        <color key="backgroundColor" red="0.91298681497573853" green="0.47153501649982005" blue="0.37331373207094842" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Library">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="launchLibrary:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J04-vI-nks"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="NA1-iR-Fbj" secondAttribute="bottom" id="0gU-Se-vJT"/>
+                                    <constraint firstAttribute="bottom" secondItem="NhO-BD-Ut0" secondAttribute="bottom" id="290-7Y-6l0"/>
+                                    <constraint firstAttribute="height" constant="50" id="2fL-pu-YHS"/>
+                                    <constraint firstItem="NA1-iR-Fbj" firstAttribute="leading" secondItem="LSx-Fm-Fq2" secondAttribute="leading" id="ElK-fS-nE3"/>
+                                    <constraint firstItem="NhO-BD-Ut0" firstAttribute="top" secondItem="LSx-Fm-Fq2" secondAttribute="top" id="LuE-Hl-AdK"/>
+                                    <constraint firstItem="NhO-BD-Ut0" firstAttribute="leading" secondItem="NA1-iR-Fbj" secondAttribute="trailing" id="NrL-3v-G3b"/>
+                                    <constraint firstItem="NA1-iR-Fbj" firstAttribute="top" secondItem="LSx-Fm-Fq2" secondAttribute="top" id="VMA-GI-805"/>
+                                    <constraint firstItem="NhO-BD-Ut0" firstAttribute="leading" secondItem="NA1-iR-Fbj" secondAttribute="trailing" id="Xae-2V-iUq"/>
+                                    <constraint firstAttribute="trailing" secondItem="NhO-BD-Ut0" secondAttribute="trailing" id="idQ-px-UPw"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LSx-Fm-Fq2" secondAttribute="bottom" id="eQV-OI-rWu"/>
+                            <constraint firstItem="LSx-Fm-Fq2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nJP-6j-6Ln"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LSx-Fm-Fq2" secondAttribute="trailing" id="zcO-ZL-ALi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

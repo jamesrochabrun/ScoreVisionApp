@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8D62022DBA500E18BFA /* AppDelegate.swift */; };
-		0907A8D92022DBA500E18BFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8D82022DBA500E18BFA /* ViewController.swift */; };
+		0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8D82022DBA500E18BFA /* PhotoListController.swift */; };
 		0907A8DC2022DBA500E18BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0907A8DA2022DBA500E18BFA /* Main.storyboard */; };
 		0907A8DF2022DBA500E18BFA /* ScoreVisionApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8DD2022DBA500E18BFA /* ScoreVisionApp.xcdatamodeld */; };
 		0907A8E12022DBA500E18BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0907A8E02022DBA500E18BFA /* Assets.xcassets */; };
 		0907A8E42022DBA500E18BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0907A8E22022DBA500E18BFA /* LaunchScreen.storyboard */; };
 		0907A8EF2022DBA500E18BFA /* ScoreVisionAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8EE2022DBA500E18BFA /* ScoreVisionAppTests.swift */; };
+		0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +30,7 @@
 /* Begin PBXFileReference section */
 		0907A8D32022DBA500E18BFA /* ScoreVisionApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreVisionApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0907A8D62022DBA500E18BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0907A8D82022DBA500E18BFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0907A8D82022DBA500E18BFA /* PhotoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListController.swift; sourceTree = "<group>"; };
 		0907A8DB2022DBA500E18BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0907A8DE2022DBA500E18BFA /* ScoreVisionApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScoreVisionApp.xcdatamodel; sourceTree = "<group>"; };
 		0907A8E02022DBA500E18BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +39,7 @@
 		0907A8EA2022DBA500E18BFA /* ScoreVisionAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScoreVisionAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0907A8EE2022DBA500E18BFA /* ScoreVisionAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreVisionAppTests.swift; sourceTree = "<group>"; };
 		0907A8F02022DBA500E18BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,10 @@
 			isa = PBXGroup;
 			children = (
 				0907A8D62022DBA500E18BFA /* AppDelegate.swift */,
-				0907A8D82022DBA500E18BFA /* ViewController.swift */,
+				0907A8FC2022DC8A00E18BFA /* Tools */,
+				0907A8FB2022DC6C00E18BFA /* Controller */,
+				0907A8FA2022DC6700E18BFA /* View */,
+				0907A8F92022DC5C00E18BFA /* Model */,
 				0907A8DA2022DBA500E18BFA /* Main.storyboard */,
 				0907A8E02022DBA500E18BFA /* Assets.xcassets */,
 				0907A8E22022DBA500E18BFA /* LaunchScreen.storyboard */,
@@ -97,6 +102,36 @@
 				0907A8F02022DBA500E18BFA /* Info.plist */,
 			);
 			path = ScoreVisionAppTests;
+			sourceTree = "<group>";
+		};
+		0907A8F92022DC5C00E18BFA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0907A8FA2022DC6700E18BFA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0907A8FB2022DC6C00E18BFA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0907A8D82022DBA500E18BFA /* PhotoListController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0907A8FC2022DC8A00E18BFA /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,8 +237,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0907A8D92022DBA500E18BFA /* ViewController.swift in Sources */,
+				0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */,
 				0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */,
+				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,
 				0907A8DF2022DBA500E18BFA /* ScoreVisionApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
