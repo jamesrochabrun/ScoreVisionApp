@@ -68,7 +68,7 @@ enum TimeAgoSelection  {
     //case xYearsAgo(x: Int)
 }
 
-/// FYI TimeAgoSelection this needs better development too much repetition here
+/// FYI TimeAgoSelection this needs better development too much repetition here and also will use code of kodak to get years etc
 extension TimeAgoSelection: PredicateThemeProvider {
     
     var dateHelper: Date {
