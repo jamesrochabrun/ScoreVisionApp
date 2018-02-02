@@ -29,12 +29,14 @@ final class PhotoListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.photoCollectionView.dataSource = photoListControllerDatasource
-        AssetProvider.getThemeFrom(predicate: .timeAgo(selection: .oneYearAgo), sortDescriptors: [.creationDate]).imagePromise.then { images in
-            self.updateCollection(images)
-            }.catch { error in
-              print("the error is \(error)")
+        
+        AssetProvider.getThemeFavorite(periodPredicate: .oneMonthAgo, sortDescriptors: [.creationDate]).themePromise.then { theme in
+            dump(theme)
+            }.catch { err in
+                print("The error is \(err)")
         }
     }
+    
     
     private func updateCollection(_ images: [UIImage]) {
         self.countLabel.text = "count of images = \(images.count)"

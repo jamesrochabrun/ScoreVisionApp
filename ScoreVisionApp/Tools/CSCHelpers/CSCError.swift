@@ -10,10 +10,12 @@ import Foundation
 
 enum CSCError: Error {
     case noImages
+    case invalidImage
     
     var localizedDescription: String {
         switch self {
         case .noImages: return "No images"
+        case .invalidImage: return "Invalid image"
         }
     }
 }
