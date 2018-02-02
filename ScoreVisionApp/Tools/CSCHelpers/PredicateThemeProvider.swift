@@ -16,60 +16,60 @@ protocol PredicateThemeProvider {
 }
 
 // MARK: - enum with associated values, in this case each value is another enum Main enum for search
-enum PredicateTheme  {
-    case favorites(selection: FavoriteSelection)
-    case timeAgo(selection: TimePeriod)
-    case location(selection: LocationSelection)
-}
-
-// MARK: - extension for protocol conformance, returns a predicate
-extension PredicateTheme: PredicateThemeProvider {
-    
-    var predicate: NSPredicate {
-        switch self {
-        case .favorites(let selection): return selection.predicate
-        case .timeAgo(let selection): return selection.predicate
-        case .location(let selection): return selection.predicate
-        }
-    }
-    
-    var caseTitle: String {
-        switch self {
-        case .favorites(let s): return "Favorites from \(s.caseTitle)"
-        case .timeAgo(let s): return "Time ago from \(s.caseTitle)"
-        case .location(let s): return "Location from \(s.caseTitle)"
-        }
-    }
-}
+//enum PredicateTheme  {
+//    case favorites(selection: FavoriteSelection)
+//    case timeAgo(selection: TimePeriod)
+//    case location(selection: LocationSelection)
+//}
+//
+//// MARK: - extension for protocol conformance, returns a predicate
+//extension PredicateTheme: PredicateThemeProvider {
+//
+//    var predicate: NSPredicate {
+//        switch self {
+//        case .favorites(let selection): return selection.predicate
+//        case .timeAgo(let selection): return selection.predicate
+//        case .location(let selection): return selection.predicate
+//        }
+//    }
+//
+//    var caseTitle: String {
+//        switch self {
+//        case .favorites(let s): return "Favorites from \(s.caseTitle)"
+//        case .timeAgo(let s): return "Time ago from \(s.caseTitle)"
+//        case .location(let s): return "Location from \(s.caseTitle)"
+//        }
+//    }
+//}
 
 
 // MARK: - small enums for each theme, they are enums because we might want...for example the favorite photos from last year
 
 // MARK: - FAVORITES
 //////////////////////////////////////////////////////////////////
-enum FavoriteSelection  {
-    case justFavorites
-    case favoritesFromOneYearAgo(date: Date)
-    case favoritesFromOneMonthAgo(date: Date)
-}
-
-extension FavoriteSelection: PredicateThemeProvider {
-    var predicate: NSPredicate {
-        switch self {
-        case .justFavorites: return NSPredicate(format: " == %d", 2 as CVarArg, 2 as CVarArg)
-        case .favoritesFromOneYearAgo(let date): return NSPredicate(format: "%d == %d", 3 as CVarArg, 2 as CVarArg)
-        case .favoritesFromOneMonthAgo(let date): return NSPredicate(format: "%d == %d", 4 as CVarArg, 2 as CVarArg)
-        }
-    }
-    
-    var caseTitle: String {
-        switch self {
-        case .justFavorites: return "all"
-        case .favoritesFromOneYearAgo(_): return "one year ago"
-        case .favoritesFromOneMonthAgo(_): return "one month ago"
-        }
-    }
-}
+//enum FavoriteSelection  {
+//    case justFavorites
+//    case favoritesFromOneYearAgo(date: Date)
+//    case favoritesFromOneMonthAgo(date: Date)
+//}
+//
+//extension FavoriteSelection: PredicateThemeProvider {
+//    var predicate: NSPredicate {
+//        switch self {
+//        case .justFavorites: return NSPredicate(format: " == %d", 2 as CVarArg, 2 as CVarArg)
+//        case .favoritesFromOneYearAgo(let date): return NSPredicate(format: "%d == %d", 3 as CVarArg, 2 as CVarArg)
+//        case .favoritesFromOneMonthAgo(let date): return NSPredicate(format: "%d == %d", 4 as CVarArg, 2 as CVarArg)
+//        }
+//    }
+//
+//    var caseTitle: String {
+//        switch self {
+//        case .justFavorites: return "all"
+//        case .favoritesFromOneYearAgo(_): return "one year ago"
+//        case .favoritesFromOneMonthAgo(_): return "one month ago"
+//        }
+//    }
+//}
 
 // MARK: - Time past
 //////////////////////////////////////////////////////////////////
@@ -77,6 +77,7 @@ enum TimePeriod {
     case ever
     case today
     case yesterday
+    case oneWeekAgo
     case oneMonthAgo
     case oneYearAgo
 }
@@ -89,6 +90,8 @@ extension TimePeriod: PredicateThemeProvider {
         case .ever:
             return Date() - 24*60*60 //test
         case .today:
+            return Date() - 24*60 ///dumm
+        case .oneWeekAgo:
             return Date() - 24*60 ///dumm
         case .yesterday:
             return Date() - 24*60*60
@@ -109,6 +112,7 @@ extension TimePeriod: PredicateThemeProvider {
         case .ever: return "ever"
         case .today: return "today"
         case .yesterday: return "yesterday"
+        case .oneWeekAgo: return "one Week Ago"
         case .oneMonthAgo: return "one month ago"
         case .oneYearAgo: return "one year ago"
         }

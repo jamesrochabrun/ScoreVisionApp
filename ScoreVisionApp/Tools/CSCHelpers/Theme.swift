@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import Photos
 
 // MARK: - struct that holds data from query results
 
 struct Theme {
     let title: String
-    let potentialAssets: [String]
+    let potentialAssets: [PHAsset]
     let analyzedAssets: [String]
 }

@@ -30,10 +30,10 @@ final class PhotoListController: UIViewController {
         super.viewDidLoad()
         self.photoCollectionView.dataSource = photoListControllerDatasource
         
-        AssetProvider.getThemeFavorite(periodPredicate: .oneMonthAgo, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFavorite(periodPredicate: .yesterday, sortDescriptors: [.creationDate]).themePromise.then { theme in
             dump(theme)
             }.catch { err in
-                print("The error is \(err)")
+                print("the error is \(err)")
         }
     }
     
