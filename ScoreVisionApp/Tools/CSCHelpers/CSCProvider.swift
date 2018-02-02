@@ -13,7 +13,7 @@ import PromiseKit
 
 // MARK: - protocol
 protocol ThemeProvider {
-    var promise: Promise<String> { get }
+    var promise: Promise<Int> { get }
 }
 
 // MARK: - Enum that returns Assets based on query
@@ -23,8 +23,7 @@ enum AssetProvider {
 
 // MARK: Extension for ThemeProvider conformance
 extension AssetProvider: ThemeProvider {
-    
-    var promise: Promise<String> {
+    var promise: Promise<Int> {
         switch self {
         case .getAssetsWith(let predicateTheme, let sortDescriptors):
             return Promise { fullfill, reject in
@@ -34,14 +33,15 @@ extension AssetProvider: ThemeProvider {
                 DispatchQueue.global(qos: .background).async {
                     let images = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: options)
                     DispatchQueue.main.async {
-                        images.count > 0 ? fullfill("done") : reject(NSError())
-
+                        images.count > 0 ? fullfill(images.count) : reject(CSCError.noImages)
                     }
                 }
             }
         }
     }
 }
+
+
 
 
 

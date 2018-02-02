@@ -19,6 +19,7 @@
 		092C13532023D8BC009F85B3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13522023D8BC009F85B3 /* Theme.swift */; };
 		092C13562023D98C009F85B3 /* SortDescriptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */; };
 		092C13582023DA36009F85B3 /* PredicateThemeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */; };
+		092C135A2023E0E1009F85B3 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13592023E0E1009F85B3 /* Result.swift */; };
 		DD45B92729D73C04A0EEDB22 /* Pods_ScoreVisionAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */; };
 		E2C01D32339C6945496C1FB6 /* Pods_ScoreVisionApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		092C13522023D8BC009F85B3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDescriptorProvider.swift; sourceTree = "<group>"; };
 		092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateThemeProvider.swift; sourceTree = "<group>"; };
+		092C13592023E0E1009F85B3 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAAF1EB20F21AD1F4331045 /* Pods-ScoreVisionAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoreVisionAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScoreVisionAppTests/Pods-ScoreVisionAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +162,6 @@
 			children = (
 				092C13512023D89D009F85B3 /* CSCHelpers */,
 				0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */,
-				0913CBD92023834200C19C95 /* CSCProvider.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -169,8 +170,10 @@
 			isa = PBXGroup;
 			children = (
 				092C13522023D8BC009F85B3 /* Theme.swift */,
+				0913CBD92023834200C19C95 /* CSCProvider.swift */,
 				092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */,
 				092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */,
+				092C13592023E0E1009F85B3 /* Result.swift */,
 			);
 			path = CSCHelpers;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				092C135A2023E0E1009F85B3 /* Result.swift in Sources */,
 				0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */,
 				0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */,
 				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,

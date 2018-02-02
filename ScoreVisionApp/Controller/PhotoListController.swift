@@ -22,8 +22,10 @@ final class PhotoListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AssetProvider.getAssetsWith(predicate: .timeAgo(selection: .oneYearAgo), sortDescriptors: [.creationDate]).promise.then { text in
-            print(text)
+        AssetProvider.getAssetsWith(predicate: .timeAgo(selection: .yesterday), sortDescriptors: [.creationDate]).promise.then { result in
+            print("the count is \(result)")
+        }.catch { error in
+                print(error)
         }
     }
     

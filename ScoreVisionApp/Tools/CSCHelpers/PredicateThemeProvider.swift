@@ -58,6 +58,7 @@ extension FavoriteSelection: PredicateThemeProvider {
 // MARK: - Time past
 //////////////////////////////////////////////////////////////////
 enum TimeAgoSelection  {
+    case today
     case yesterday
     case oneMonthAgo
     case oneYearAgo
@@ -67,6 +68,8 @@ extension TimeAgoSelection {
     
     var dateHelper: Date {
         switch self {
+        case .today:
+            return Date()
         case .yesterday:
             return Date() - 24*60*60
         case .oneMonthAgo:
@@ -78,6 +81,8 @@ extension TimeAgoSelection {
     
     var predicate: NSPredicate {
         switch self {
+        case .today:
+         return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate < %@ AND creationDate > %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, Date() as CVarArg, dateHelper as NSDate)
         case .yesterday:
             return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate < %@ AND creationDate > %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, Date() as CVarArg, dateHelper as NSDate)
         case .oneMonthAgo:
