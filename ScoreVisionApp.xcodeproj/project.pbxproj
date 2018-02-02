@@ -20,6 +20,8 @@
 		092C13562023D98C009F85B3 /* SortDescriptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */; };
 		092C13582023DA36009F85B3 /* PredicateThemeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */; };
 		092C135A2023E0E1009F85B3 /* CSCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13592023E0E1009F85B3 /* CSCError.swift */; };
+		092C135D202427E6009F85B3 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135C202427E6009F85B3 /* Reusable.swift */; };
+		092C135F20242932009F85B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135E20242932009F85B3 /* PhotoCell.swift */; };
 		DD45B92729D73C04A0EEDB22 /* Pods_ScoreVisionAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */; };
 		E2C01D32339C6945496C1FB6 /* Pods_ScoreVisionApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */; };
 /* End PBXBuildFile section */
@@ -52,6 +54,8 @@
 		092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDescriptorProvider.swift; sourceTree = "<group>"; };
 		092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateThemeProvider.swift; sourceTree = "<group>"; };
 		092C13592023E0E1009F85B3 /* CSCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCError.swift; sourceTree = "<group>"; };
+		092C135C202427E6009F85B3 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		092C135E20242932009F85B3 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAAF1EB20F21AD1F4331045 /* Pods-ScoreVisionAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoreVisionAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScoreVisionAppTests/Pods-ScoreVisionAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +116,7 @@
 		0907A8D52022DBA500E18BFA /* ScoreVisionApp */ = {
 			isa = PBXGroup;
 			children = (
+				092C135B202427D2009F85B3 /* Protocols */,
 				0907A8D62022DBA500E18BFA /* AppDelegate.swift */,
 				0907A8FC2022DC8A00E18BFA /* Tools */,
 				0907A8FB2022DC6C00E18BFA /* Controller */,
@@ -145,6 +150,7 @@
 		0907A8FA2022DC6700E18BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				092C135E20242932009F85B3 /* PhotoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,6 +182,14 @@
 				092C13592023E0E1009F85B3 /* CSCError.swift */,
 			);
 			path = CSCHelpers;
+			sourceTree = "<group>";
+		};
+		092C135B202427D2009F85B3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				092C135C202427E6009F85B3 /* Reusable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		9C7D1DB9D03173608F1BCDB1 /* Pods */ = {
@@ -404,10 +418,12 @@
 				0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */,
 				0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */,
 				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,
+				092C135D202427E6009F85B3 /* Reusable.swift in Sources */,
 				092C13532023D8BC009F85B3 /* Theme.swift in Sources */,
 				0913CBDA2023834200C19C95 /* CSCProvider.swift in Sources */,
 				092C13562023D98C009F85B3 /* SortDescriptorProvider.swift in Sources */,
 				092C13582023DA36009F85B3 /* PredicateThemeProvider.swift in Sources */,
+				092C135F20242932009F85B3 /* PhotoCell.swift in Sources */,
 				0907A8DF2022DBA500E18BFA /* ScoreVisionApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

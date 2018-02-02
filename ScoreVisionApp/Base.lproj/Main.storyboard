@@ -61,23 +61,80 @@
                                     <constraint firstAttribute="width" constant="200" id="Y7C-Jl-agS"/>
                                 </constraints>
                             </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="csT-sM-ifu">
+                                <rect key="frame" x="0.0" y="447" width="375" height="120"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="f2m-qb-rh9"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oh1-Xu-8GB">
+                                    <size key="itemSize" width="130" height="120"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="9d6-Pg-B2x" userLabel="PhotoCell" customClass="PhotoCell" customModule="ScoreVisionApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zgf-FQ-ew5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="120"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="Zgf-FQ-ew5" firstAttribute="top" secondItem="9d6-Pg-B2x" secondAttribute="top" id="5rW-vH-ucQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Zgf-FQ-ew5" secondAttribute="trailing" id="7QU-g9-wLn"/>
+                                            <constraint firstAttribute="bottom" secondItem="Zgf-FQ-ew5" secondAttribute="bottom" id="Yf1-ox-17m"/>
+                                            <constraint firstItem="Zgf-FQ-ew5" firstAttribute="leading" secondItem="9d6-Pg-B2x" secondAttribute="leading" id="lAH-nr-vad"/>
+                                        </constraints>
+                                        <size key="customSize" width="130" height="120"/>
+                                        <connections>
+                                            <outlet property="photoImageView" destination="Zgf-FQ-ew5" id="GZS-HX-dOZ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="f6A-45-ZcO"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wik-QU-1Gn">
+                                <rect key="frame" x="0.0" y="567" width="375" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="csT-sM-ifu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4lw-LP-EtM"/>
                             <constraint firstItem="v3n-IG-3wC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8rO-ej-byd"/>
+                            <constraint firstItem="Wik-QU-1Gn" firstAttribute="top" secondItem="csT-sM-ifu" secondAttribute="bottom" id="N63-cu-8sz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Wik-QU-1Gn" secondAttribute="trailing" id="SQA-qC-ucN"/>
+                            <constraint firstItem="LSx-Fm-Fq2" firstAttribute="top" secondItem="csT-sM-ifu" secondAttribute="bottom" constant="50" id="Vzw-Lc-lUn"/>
+                            <constraint firstItem="LSx-Fm-Fq2" firstAttribute="top" secondItem="Wik-QU-1Gn" secondAttribute="bottom" id="dyN-qr-5b0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LSx-Fm-Fq2" secondAttribute="bottom" id="eQV-OI-rWu"/>
+                            <constraint firstItem="Wik-QU-1Gn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jDg-lR-CBd"/>
                             <constraint firstItem="LSx-Fm-Fq2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nJP-6j-6Ln"/>
                             <constraint firstItem="v3n-IG-3wC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="s7S-Gi-mkl"/>
+                            <constraint firstItem="csT-sM-ifu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sba-dB-v9V"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LSx-Fm-Fq2" secondAttribute="trailing" id="zcO-ZL-ALi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="countLabel" destination="Wik-QU-1Gn" id="c1a-Sd-DuV"/>
+                        <outlet property="photoCollectionView" destination="csT-sM-ifu" id="bGG-Kw-aJZ"/>
                         <outlet property="photoImageView" destination="v3n-IG-3wC" id="NzM-RF-wg9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="140" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>

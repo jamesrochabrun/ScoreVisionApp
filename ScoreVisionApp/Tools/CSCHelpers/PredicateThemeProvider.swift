@@ -65,7 +65,6 @@ enum TimeAgoSelection  {
     case yesterday
     case oneMonthAgo
     case oneYearAgo
-    //case xYearsAgo(x: Int)
 }
 
 /// FYI TimeAgoSelection this needs better development too much repetition here and also will use code of kodak to get years etc
@@ -81,23 +80,12 @@ extension TimeAgoSelection: PredicateThemeProvider {
             return Date() - (24*60*60*30)
         case .oneYearAgo:
             return Date() - (24*60*60*365)
-//        case .xYearsAgo(let x):
-//            let yearsAgo: Double = (24*60*60*365*x)
-//            return Date() - yearsAgo
         }
     }
     
     var predicate: NSPredicate {
-        switch self {
-        case .today:
-         return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate < %@ AND creationDate > %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, Date() as CVarArg, dateHelper as NSDate)
-        case .yesterday:
-            return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate < %@ AND creationDate > %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, Date() as CVarArg, dateHelper as NSDate)
-        case .oneMonthAgo:
-            return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate < %@ AND creationDate > %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, Date() as CVarArg, dateHelper as NSDate)
-        case .oneYearAgo:
-            return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate < %@ AND creationDate > %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, Date() as CVarArg, dateHelper as NSDate)
-        }
+        print("date helper = \(dateHelper)")
+        return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate >= %@ AND creationDate < %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, dateHelper as NSDate, Date() as CVarArg)
     }
 }
 
