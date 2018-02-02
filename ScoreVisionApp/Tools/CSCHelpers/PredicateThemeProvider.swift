@@ -14,10 +14,11 @@ protocol PredicateThemeProvider {
     var predicate: NSPredicate { get }
 }
 
-// MARK: - enum with associated values, in this case each value is another enum
+// MARK: - enum with associated values, in this case each value is another enum Main enum for search
 enum PredicateTheme  {
     case favorites(selection: FavoriteSelection)
     case timeAgo(selection: TimeAgoSelection)
+    case location(selection: LocationSelection)
 }
 
 // MARK: - extension for protocol conformance, returns a predicate
@@ -27,6 +28,8 @@ extension PredicateTheme: PredicateThemeProvider {
         case .favorites(let selection):
             return selection.predicate
         case .timeAgo(let selection):
+            return selection.predicate
+        case .location(let selection):
             return selection.predicate
         }
     }
@@ -62,9 +65,11 @@ enum TimeAgoSelection  {
     case yesterday
     case oneMonthAgo
     case oneYearAgo
+    //case xYearsAgo(x: Int)
 }
 
-extension TimeAgoSelection {
+/// FYI TimeAgoSelection this needs better development too much repetition here
+extension TimeAgoSelection: PredicateThemeProvider {
     
     var dateHelper: Date {
         switch self {
@@ -76,6 +81,9 @@ extension TimeAgoSelection {
             return Date() - (24*60*60*30)
         case .oneYearAgo:
             return Date() - (24*60*60*365)
+//        case .xYearsAgo(let x):
+//            let yearsAgo: Double = (24*60*60*365*x)
+//            return Date() - yearsAgo
         }
     }
     
@@ -93,6 +101,26 @@ extension TimeAgoSelection {
     }
 }
 
+// MARK: - Nearby
+//////////////////////////////////////////////////////////////////
+enum LocationSelection {
+    case thisLocation(lat: CGFloat, long: CGFloat)
+    case inLocation(lat: CGFloat, long: CGFloat)
+}
+
+extension LocationSelection: PredicateThemeProvider {
+    var predicate: NSPredicate {
+        switch self {
+        case .thisLocation(let lat, let long):
+            return NSPredicate()
+        case .inLocation(let lat, let long):
+            return NSPredicate()
+        }
+    }
+}
+
+// MARK: - Nearby
+//////////////////////////////////////////////////////////////////
 
 
 

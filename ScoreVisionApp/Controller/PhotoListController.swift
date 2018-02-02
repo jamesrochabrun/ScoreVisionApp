@@ -22,13 +22,12 @@ final class PhotoListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AssetProvider.getAssetsWith(predicate: .timeAgo(selection: .yesterday), sortDescriptors: [.creationDate]).promise.then { result in
-            print("the count is \(result)")
+        AssetProvider.getThemeFrom(predicate: .timeAgo(selection: .yesterday), sortDescriptors: [.creationDate]).themePromise.then { result in
+            dump(result)
         }.catch { error in
                 print(error)
         }
     }
-    
     
     @IBAction func launchLibrary(_ sender: UIButton) {
         photoPickerManager.presentPhotoPicker(from: CameraSourceType.librarySource, animated: true)
