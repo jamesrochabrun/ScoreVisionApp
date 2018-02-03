@@ -22,6 +22,7 @@ enum AssetProvider {
     case getThemeFromPeriod(periodPredicate: TimePeriod, sortDescriptors: [SortProvider])
     case getThemeFavorite(periodPredicate: TimePeriod, sortDescriptors: [SortProvider])
     case getThemeNearby(periodPredicate: TimePeriod, sortDescriptors: [SortProvider])
+    case getSmartAlbum(subType: PHAssetCollectionSubtype, periodPredicate: TimePeriod, sortDescriptors: [SortProvider])
 }
 
 // MARK: Extension for ThemeProvider conformance
@@ -35,6 +36,8 @@ extension AssetProvider: ThemeProvider {
             return self.getFavorite(from: periodPredicate, sortDescriptors: sortDescriptors)
         case .getThemeNearby(let periodPredicate, let sortDescriptors):
             return self.getNearby(from: periodPredicate, sortDescriptors: sortDescriptors)
+        case .getSmartAlbum(let phassetCollectionType, let periodPredicate, let sortDescriptors):
+            return self.getAlbum(subType: phassetCollectionType, from: periodPredicate, sortDescriptors: sortDescriptors)
         }
     }
     
@@ -68,7 +71,7 @@ extension AssetProvider: ThemeProvider {
             options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
             DispatchQueue.global(qos: .background).async {
                 // step 2 perform the fetch request for the assets
-                let assets = self.getAssetsFom(type:  PHAssetMediaType.image, with: options)
+                let assets = self.getAssetsFom(type: PHAssetMediaType.image, with: options)
                 DispatchQueue.main.async {
                     let theme = Theme(title: "Favorites from \(period.caseTitle)", potentialAssets: assets, analyzedAssets: [])
                     assets.count > 0 ? fullfill(theme) : reject(CSCError.noImages)
@@ -113,18 +116,27 @@ extension AssetProvider: ThemeProvider {
             }
         }
     }
+    
+    // 4 get smart albums
 
+    func getAlbum(subType: PHAssetCollectionSubtype, from period: TimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
     
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        return Promise { fullfill, reject in
+            let options = PHFetchOptions.init()
+            options.predicate = period.predicate
+            options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
+            DispatchQueue.global(qos: .background).async {
+                let smartAlbum: PHCollection = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: subType, options: options)
+                let results = PHAsset.fetchAssets(in: smartAlbum, options: options)
+                
+         
+                DispatchQueue.main.async {
+                    let theme = Theme(title: "Smart album \(subType.rawValue) in \(period.caseTitle)", potentialAssets: assets, analyzedAssets: [])
+                    assets.count > 0 ? fullfill(theme) : reject(CSCError.noImages)
+                }
+            }
+        }
+    }
     
     
     //testing /////////////////////////////////
