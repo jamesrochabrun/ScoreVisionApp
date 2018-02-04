@@ -25,29 +25,89 @@ final class PhotoListController: UIViewController {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var photoCollectionView: UICollectionView!
     @IBOutlet weak var countLabel: UILabel!
-    
+    var titleTheme: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.photoCollectionView.dataSource = photoListControllerDatasource
-        
-//        AssetProvider.getThemeFavorite(periodPredicate: .oneMonthAgo, sortDescriptors: [.creationDate]).themePromise.then { theme in
-//           // dump(theme)
-//            self.updateCollection(theme)
-//            }.catch { err in
-//                print("the error is \(err)")
-//        }
-        
-        AssetProvider.getSmartAlbum(subType: .smartAlbumFavorites, periodPredicate: .oneMonthAgo, sortDescriptors: [.creationDate]).themePromise.then { theme in
+    }
+    
+    @IBAction func getSelfies(_ sender: UIButton) {
+        titleTheme = "Selfies"
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumSelfPortraits, periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
+            //dump(theme)
+
             }.catch { error in
                 print("the error here is that \(error)")
         }
     }
     
+    @IBAction func getFavorites(_ sender: UIButton) {
+        titleTheme = "Favorites"
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumFavorites , periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+            self.updateCollection(theme)
+            //dump(theme)
+
+            }.catch { error in
+                print("the error here is that \(error)")
+        }
+    }
+    
+    @IBAction func getLivePhotos(_ sender: UIButton) {
+        titleTheme = "Live Photos"
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumLivePhotos, periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+            self.updateCollection(theme)
+           // dump(theme)
+
+            }.catch { error in
+                print("the error here is that \(error)")
+        }
+    }
+    
+    @IBAction func getPortraits(_ sender: UIButton) {
+        titleTheme = "Portraits"
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumDepthEffect, periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+            self.updateCollection(theme)
+            //dump(theme)
+
+            }.catch { error in
+                print("the error here is that \(error)")
+        }
+    }
+    //albumMyPhotoStream icloud
+    //smartAlbumAllHidden
+    //smartAlbumUserLibrary //s opposed to assets from iCloud Shared Albums
+    
+    //albumCloudShared //An iCloud Shared Photo Stream.
+    //albumMyPhotoStream //The user’s personal iCloud Photo Stream.
+    //smartAlbumLongExposures //
+
+    
+    @IBAction func getRecentlyAdded(_ sender: UIButton) {
+        titleTheme = "Recently added"
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumRecentlyAdded, periodPredicate: .ever, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+            self.updateCollection(theme)
+            //dump(theme)
+            }.catch { error in
+                print("the error here is that \(error)")
+        }
+    }
+    
+    @IBAction func getAllPhotos(_ sender: UIButton) {
+        titleTheme = "All photos"
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumUserLibrary, periodPredicate: .ever, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+            self.updateCollection(theme)
+            //dump(theme)
+            }.catch { error in
+                print("the error here is that \(error)")
+        }
+    }
+        
+    
     // helper for testing
     private func updateUI(_ images: [UIImage]) {
-        self.countLabel.text = "count of images = \(images.count)"
+        self.countLabel.text = "\(titleTheme) count: = \(images.count)"
         self.photoListControllerDatasource.updateData(images: images)
         self.photoCollectionView.reloadData()
     }
@@ -108,8 +168,6 @@ extension PhotoListController {
         for asset in theme.potentialAssets {
             print("KMTEST \(asset.isFavorite)")
         }
-        
-        
         self.createAndReturnImages(with :theme.potentialAssets, options: options).then { images in
             self.updateUI(images)
             }.catch { error in

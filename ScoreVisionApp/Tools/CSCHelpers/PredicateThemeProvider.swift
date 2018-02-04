@@ -85,10 +85,10 @@ enum TimePeriod {
 /// FYI TimeAgoSelection this needs better development too much repetition here and also will use code of kodak to get years etc
 extension TimePeriod: PredicateThemeProvider {
     
-    private var dateHelper: Date {
+    private var dateHelper: Date? {
         switch self {
         case .ever:
-            return Date() - 24*60*60 //test
+            return nil
         case .today:
             return Date() - 24*60 ///dumm
         case .oneWeekAgo:
@@ -103,7 +103,9 @@ extension TimePeriod: PredicateThemeProvider {
     }
     
     var predicate: NSPredicate {
-        print("date helper = \(dateHelper)")
+        guard let dateHelper = dateHelper else {
+            return NSPredicate(format: "!((mediaSubtype & %d) == %d)", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue)
+        }
         return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate >= %@ AND creationDate < %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, dateHelper as NSDate, Date() as CVarArg)
     }
     

@@ -66,18 +66,25 @@ extension PhotoPickerManager: UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        guard let asset = info[UIImagePickerControllerPHAsset] as? PHAsset else { return }
-        let options = PHImageRequestOptions()
-        options.version = .current
-        options.resizeMode = .fast
-        options.isSynchronous = true
-        
-        let bestTargetSize: CGSize = CGSize(width: 800, height: 800)
-        PHImageManager.default().requestImage(for: asset, targetSize: bestTargetSize, contentMode: .aspectFit, options: options) { (response, options) in 
-            guard let image = response else { return }
+        /// getting original image for camera
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.delegate?.manager(self, didPickImage: image)
+            
+        } else {
+            guard let asset = info[UIImagePickerControllerPHAsset] as? PHAsset else {
+                return
+            }
+            let options = PHImageRequestOptions()
+            options.version = .current
+            options.resizeMode = .fast
+            options.isSynchronous = true
+            let bestTargetSize: CGSize = CGSize(width: 800, height: 800)
+            PHImageManager.default().requestImage(for: asset, targetSize: bestTargetSize, contentMode: .aspectFit, options: options) { (response, options) in
+                guard let image = response else { return }
+                self.delegate?.manager(self, didPickImage: image)
             }
         }
+    }
 }
 
 
