@@ -16,9 +16,6 @@ protocol KMCSCPredicateThemeProvider {
 }
 
 
-// MARK: - Time past
-/// FYI TimeAgoSelection this needs better development too much repetition here and also will use code of kodak to get years etc
-
 enum KMCSCTimePeriod {
     
     case ever
@@ -37,16 +34,7 @@ extension KMCSCTimePeriod: KMCSCPredicateThemeProvider {
         case .ever:
             return []
         case .yesterday:
-            var components = DateComponents()
-            components.day = -1
-            guard let startDate = Calendar.current.date(byAdding: components, to: Date().startOfDay) else {
-                return []
-            }
-            guard let endOfToday = Date().endOfDay, let endDate = Calendar.current.date(byAdding: components, to: endOfToday) else {
-                return []
-            }
-            return [startDate, endDate]
-            
+            return dateManager.retrieveDate(period: .yesterday)
         case .thisDayXYearsAgo(let x):
             return dateManager.retrieveDate(period: .thisDayXYearsAgo(x: x))
         case .thisWeekXYearsAgo(let x):

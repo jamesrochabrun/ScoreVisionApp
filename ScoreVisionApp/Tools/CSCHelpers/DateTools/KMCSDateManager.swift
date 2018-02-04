@@ -20,6 +20,9 @@ class KMCSDateManager: NSObject {
         
         switch period {
             
+        case .yesterday:
+            return self.getYesterday()
+            
         case .thisDayXYearsAgo(let x):
             return self.getThisDayXYearsAgo(x: x)
             
@@ -102,6 +105,18 @@ class KMCSDateManager: NSObject {
         }()
         
         return [beginTime,endTime]
+    }
+    
+    private func getYesterday() -> [Date] {
+        var components = DateComponents()
+        components.day = -1
+        guard let startDate = Calendar.current.date(byAdding: components, to: Date().startOfDay) else {
+            return []
+        }
+        guard let endOfToday = Date().endOfDay, let endDate = Calendar.current.date(byAdding: components, to: endOfToday) else {
+            return []
+        }
+        return [startDate, endDate]
     }
     
     func dateComparison(period: KMCSCTimePeriod, date: Date) -> Bool {
