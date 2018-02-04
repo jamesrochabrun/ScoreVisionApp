@@ -92,7 +92,7 @@ extension TimePeriod: PredicateThemeProvider {
         case .today:
             return Date() - 24*60 ///dumm
         case .oneWeekAgo:
-            return Date() - 24*60 ///dumm
+            return Date() - 24*60*60*7 ///dumm
         case .yesterday:
             return Date() - 24*60*60
         case .oneMonthAgo:

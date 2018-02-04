@@ -41,6 +41,8 @@ extension AssetProvider: ThemeProvider {
         }
     }
     
+    
+    
     /// 1 getThemeFromPeriod
     private func getTheme(from period: TimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
         return Promise { fullfill, reject in
@@ -120,83 +122,29 @@ extension AssetProvider: ThemeProvider {
     // 4 get smart albums
 
     func getAlbum(subType: PHAssetCollectionSubtype, from period: TimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
-    
-        return Promise { fullfill, reject in
-            let options = PHFetchOptions.init()
-            options.predicate = period.predicate
-            options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
-            DispatchQueue.global(qos: .background).async {
-                let smartAlbum: PHCollection = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: subType, options: options)
-                let results = PHAsset.fetchAssets(in: smartAlbum, options: options)
-                
-         
-                DispatchQueue.main.async {
-                    let theme = Theme(title: "Smart album \(subType.rawValue) in \(period.caseTitle)", potentialAssets: assets, analyzedAssets: [])
-                    assets.count > 0 ? fullfill(theme) : reject(CSCError.noImages)
-                }
-            }
-        }
-    }
-    
-    
-    //testing /////////////////////////////////
-    
-    
-    //    var imagePromise: Promise<UIImage> {
-    //        switch self {
-    //        case .getThemeFavorites(let periodPredicate, let sortDescriptors):
-    //            return Promise { fullfill, reject in
-    //                //step 1 create the options
-    //                let options = PHFetchOptions.init()
-    //                options.predicate = periodPredicate.predicate
-    //                options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
-    //                DispatchQueue.global(qos: .background).async {
-    //                    // step 2 perform the fetch request
-    //                    let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: options)
-    //
-    //                    DispatchQueue.global(qos: .background).async {
-    //                        // step 2 perform the fetch request
-    //                        let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: options)
-    //
-    //                        var favorites: [PHAsset] = []
-    //                        assets.enumerateObjects { asset, index, stop in
-    //                            if asset.isFavorite {
-    //                                favorites.append(asset)
-    //                            }
-    //                        }
-    //
-    //                        var favoriteImages: [UIImage] = []
-    //                        for favoriteAsset in favorites {
-    //                            self.createAndReturnImage(with: favoriteAsset).then { image in
-    //                                favoriteImages.append(image)
-    //                            }
-    //                        }
-    //                        DispatchQueue.main.async {
-    //                            // step 3 return the struct
-    //                            assets.count > 0 ? fullfill(self.createAndReturnTheme(with: assets, titleTheme: "Favorites from \(periodPredicate.caseTitle)") : reject(CSCError.noImages)
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    
-    //MARK: - helper for images
-    private func createAndReturnImage(with asset: PHAsset) -> Promise<UIImage> {
         
         return Promise { fullfill, reject in
-            let options = PHImageRequestOptions()
-            options.version = .current
-            options.resizeMode = .fast
-            options.isSynchronous = false
-            PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 800, height: 800), contentMode: .aspectFit, options: options, resultHandler: { response, options in
-                guard let image = response else {
-                    print("Big error here")
-                    reject(CSCError.invalidImage)
-                    return
-                }
-                fullfill(image)
-            })
+            
+            DispatchQueue.global(qos: .background).async {
+                let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: subType, options: nil)
+                guard let assetCollection = smartAlbum.firstObject
+                    else { fatalError("expected asset collection") }
+                var assets: [PHAsset] = []
+                let options = PHFetchOptions.init()
+                options.predicate = period.predicate
+                options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
+                PHPhotoLibrary.shared().performChanges({
+                    let assetResult = PHAsset.fetchAssets(in: assetCollection, options: options)
+                    assetResult.enumerateObjects { asset, index, stop in
+                        assets.append(asset)
+                    }
+                }, completionHandler: {success, error in
+                    DispatchQueue.main.async {
+                        let theme = Theme(title: "Smart album in \(period.caseTitle)", potentialAssets: assets, analyzedAssets: [])
+                        assets.count > 0 ? fullfill(theme) : reject(CSCError.noImages)
+                    }
+                })
+            }
         }
     }
 }
@@ -207,26 +155,6 @@ extension AssetProvider: ThemeProvider {
 
 
 
-
-//var albumPromise: Promise<[UIImage]> {
-//    switch self {
-//    case .getThemeFrom(let predicateTheme, let sortDescriptors):
-//        return Promise { fullfill, reject in
-//            //step 1 create the options
-//            let options = PHFetchOptions.init()
-//            options.predicate = predicateTheme.predicate
-//            options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
-//
-//            DispatchQueue.global(qos: .background).async {
-//                // step 2 perform the fetch request
-//                self.fetchCustomAlbumPhotos().then { images in
-//                    images.count > 0 ? fullfill(images) : reject(CSCError.noImages)
-//                }
-//            }
-//        }
-//    }
-//}
-//
 //
 //func fetchCustomAlbumPhotos() -> Promise<[UIImage]>  {
 //
