@@ -20,11 +20,11 @@ protocol ThemeProvider {
 // MARK: - Enum that returns Assets based on query
 enum AssetProvider {
     /// fetch assets from library on certain period
-    case getThemeFromPeriod(periodPredicate: TimePeriod, sortDescriptors: [SortProvider])
+    case getThemeFromPeriod(periodPredicate: KMCSCTimePeriod, sortDescriptors: [SortProvider])
     /// fetch assets from library based on distance
-    case getThemeNearby(periodPredicate: TimePeriod, sortDescriptors: [SortProvider])
+    case getThemeNearby(periodPredicate: KMCSCTimePeriod, sortDescriptors: [SortProvider])
     /// fetch asstes from smart albums like, selfies, favorites, live photos,
-    case getThemeFromSmartAlbum(subType: PHAssetCollectionSubtype, periodPredicate: TimePeriod, justFavorites: Bool, sortDescriptors: [SortProvider])
+    case getThemeFromSmartAlbum(subType: PHAssetCollectionSubtype, periodPredicate: KMCSCTimePeriod, justFavorites: Bool, sortDescriptors: [SortProvider])
 }
 
 // MARK: Extension for ThemeProvider conformance
@@ -42,7 +42,7 @@ extension AssetProvider: ThemeProvider {
     }
         
     /// 1 getThemeFromPeriod
-    private func getTheme(from period: TimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
+    private func getTheme(from period: KMCSCTimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
         return Promise { fullfill, reject in
             //step 1 create the options
             let options = PHFetchOptions.init()
@@ -52,7 +52,7 @@ extension AssetProvider: ThemeProvider {
                 // step 2 perform the fetch request for the assets
                 let assets = self.getAssetsFom(type:  PHAssetMediaType.image, with: options)
                 DispatchQueue.main.async {
-                    let theme = Theme(title: "Theme time period from \(period.caseTitle)", potentialAssets: assets, analyzedAssets: [])
+                    let theme = Theme(title: "Theme time period from ", potentialAssets: assets, analyzedAssets: [])
                     assets.count > 0 ? fullfill(theme) : reject(CSCError.noImages)
                 }
             }
@@ -68,7 +68,7 @@ extension AssetProvider: ThemeProvider {
     }
     
     /// 3 get nearby them
-    private func getNearby(from period: TimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
+    private func getNearby(from period: KMCSCTimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
         return Promise { fullfill, reject in
             //step 1 create the options
             let options = PHFetchOptions.init()
@@ -89,7 +89,7 @@ extension AssetProvider: ThemeProvider {
                     }
                 }
                 DispatchQueue.main.async {
-                    let theme = Theme(title: "Nearby from \(period.caseTitle)", potentialAssets: [], analyzedAssets: [])
+                    let theme = Theme(title: "Nearby from ", potentialAssets: [], analyzedAssets: [])
                     nearbyIDs.count > 0 ? fullfill(theme) : reject(CSCError.noImages)
                 }
             }
@@ -98,7 +98,7 @@ extension AssetProvider: ThemeProvider {
     
 
     //MAin action here
-    func getAlbum(subType: PHAssetCollectionSubtype, justFavorites: Bool, from period: TimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
+    func getAlbum(subType: PHAssetCollectionSubtype, justFavorites: Bool, from period: KMCSCTimePeriod, sortDescriptors: [SortProvider]) -> Promise<Theme> {
         
         return Promise { fullfill, reject in
             
@@ -140,7 +140,7 @@ extension AssetProvider: ThemeProvider {
                     }
                 }, completionHandler: {success, error in
                     DispatchQueue.main.async {
-                        let theme = Theme(title: "Smart album in \(period.caseTitle)", potentialAssets: assets, analyzedAssets: [])
+                        let theme = Theme(title: "Smart album in", potentialAssets: assets, analyzedAssets: [])
                         assets.count > 0 ? fullfill(theme) : reject(CSCError.noImages)
                     }
                 })

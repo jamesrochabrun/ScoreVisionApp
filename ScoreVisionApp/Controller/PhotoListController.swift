@@ -34,7 +34,7 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getSelfies(_ sender: UIButton) {
         titleTheme = "Selfies"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumSelfPortraits, periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumSelfPortraits, periodPredicate: .today, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
             //dump(theme)
 
@@ -45,7 +45,7 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getFavorites(_ sender: UIButton) {
         titleTheme = "Favorites"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumFavorites , periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumFavorites , periodPredicate: .yesterday, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
             //dump(theme)
 
@@ -56,10 +56,9 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getLivePhotos(_ sender: UIButton) {
         titleTheme = "Live Photos"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumLivePhotos, periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumLivePhotos, periodPredicate: .thisDayXYearsAgo(x: 1), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
            // dump(theme)
-
             }.catch { error in
                 print("the error here is that \(error)")
         }
@@ -67,7 +66,7 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getPortraits(_ sender: UIButton) {
         titleTheme = "Portraits"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumDepthEffect, periodPredicate: .oneMonthAgo, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumDepthEffect, periodPredicate: .thisMonthXYearsAgo(x: 1), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
             //dump(theme)
 
@@ -86,7 +85,7 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getRecentlyAdded(_ sender: UIButton) {
         titleTheme = "Recently added"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumRecentlyAdded, periodPredicate: .ever, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumRecentlyAdded, periodPredicate: .thisDayXYearsAgo(x: 0), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
             //dump(theme)
             }.catch { error in
@@ -96,7 +95,7 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getAllPhotos(_ sender: UIButton) {
         titleTheme = "All photos"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumUserLibrary, periodPredicate: .ever, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumUserLibrary, periodPredicate: .thisMonthXYearsAgo(x: 4), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
             //dump(theme)
             }.catch { error in

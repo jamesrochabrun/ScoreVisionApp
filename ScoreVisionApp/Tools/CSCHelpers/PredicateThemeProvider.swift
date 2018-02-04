@@ -10,116 +10,109 @@ import UIKit
 import Photos
 
 //MARK: - protocol
-protocol PredicateThemeProvider {
+protocol KMCSCPredicateThemeProvider {
     var predicate: NSPredicate { get }
-    var caseTitle: String { get }
+   // var caseTitle: String { get }
 }
 
-// MARK: - enum with associated values, in this case each value is another enum Main enum for search
-//enum PredicateTheme  {
-//    case favorites(selection: FavoriteSelection)
-//    case timeAgo(selection: TimePeriod)
-//    case location(selection: LocationSelection)
-//}
-//
-//// MARK: - extension for protocol conformance, returns a predicate
-//extension PredicateTheme: PredicateThemeProvider {
-//
-//    var predicate: NSPredicate {
-//        switch self {
-//        case .favorites(let selection): return selection.predicate
-//        case .timeAgo(let selection): return selection.predicate
-//        case .location(let selection): return selection.predicate
-//        }
-//    }
-//
-//    var caseTitle: String {
-//        switch self {
-//        case .favorites(let s): return "Favorites from \(s.caseTitle)"
-//        case .timeAgo(let s): return "Time ago from \(s.caseTitle)"
-//        case .location(let s): return "Location from \(s.caseTitle)"
-//        }
-//    }
-//}
-
-
-// MARK: - small enums for each theme, they are enums because we might want...for example the favorite photos from last year
-
-// MARK: - FAVORITES
-//////////////////////////////////////////////////////////////////
-//enum FavoriteSelection  {
-//    case justFavorites
-//    case favoritesFromOneYearAgo(date: Date)
-//    case favoritesFromOneMonthAgo(date: Date)
-//}
-//
-//extension FavoriteSelection: PredicateThemeProvider {
-//    var predicate: NSPredicate {
-//        switch self {
-//        case .justFavorites: return NSPredicate(format: " == %d", 2 as CVarArg, 2 as CVarArg)
-//        case .favoritesFromOneYearAgo(let date): return NSPredicate(format: "%d == %d", 3 as CVarArg, 2 as CVarArg)
-//        case .favoritesFromOneMonthAgo(let date): return NSPredicate(format: "%d == %d", 4 as CVarArg, 2 as CVarArg)
-//        }
-//    }
-//
-//    var caseTitle: String {
-//        switch self {
-//        case .justFavorites: return "all"
-//        case .favoritesFromOneYearAgo(_): return "one year ago"
-//        case .favoritesFromOneMonthAgo(_): return "one month ago"
-//        }
-//    }
-//}
 
 // MARK: - Time past
-//////////////////////////////////////////////////////////////////
-enum TimePeriod {
-    case ever
-    case today
-    case yesterday
-    case oneWeekAgo
-    case oneMonthAgo
-    case oneYearAgo
-}
-
 /// FYI TimeAgoSelection this needs better development too much repetition here and also will use code of kodak to get years etc
-extension TimePeriod: PredicateThemeProvider {
+
+enum KMCSCTimePeriod {
     
-    private var dateHelper: Date? {
+    case ever
+    case yesterday
+    
+    case thisDayXYearsAgo(x: Int)
+    case thisWeekXYearsAgo(x: Int)
+    case thisMonthXYearsAgo(x: Int)
+}
+/// FYI TimeAgoSelection this needs better development too much repetition here and also will use code of kodak to get years etc
+extension KMCSCTimePeriod: KMCSCPredicateThemeProvider {
+    
+    private var dateConstructor: [Date] {
+        let dateManager = KMCSDateManager()
         switch self {
         case .ever:
-            return nil
-        case .today:
-            return Date() - 24*60 ///dumm
-        case .oneWeekAgo:
-            return Date() - 24*60*60*7 ///dumm
+            return []
         case .yesterday:
-            return Date() - 24*60*60
-        case .oneMonthAgo:
-            return Date() - (24*60*60*30)
-        case .oneYearAgo:
-            return Date() - 26280000
+            var components = DateComponents()
+            components.day = -1
+            guard let startDate = Calendar.current.date(byAdding: components, to: Date().startOfDay) else {
+                return []
+            }
+            guard let endOfToday = Date().endOfDay, let endDate = Calendar.current.date(byAdding: components, to: endOfToday) else {
+                return []
+            }
+            return [startDate, endDate]
+            
+        case .thisDayXYearsAgo(let x):
+            return dateManager.retrieveDate(period: .thisDayXYearsAgo(x: x))
+        case .thisWeekXYearsAgo(let x):
+            return dateManager.retrieveDate(period: .thisWeekXYearsAgo(x: x))
+        case .thisMonthXYearsAgo(let x):
+            return dateManager.retrieveDate(period: .thisMonthXYearsAgo(x: x))
+            
+//        case .thisWeekLastYear:
+//            return dateManager.retrieveDate(theme: .thisWeekLastYear)
+//        case .thisMonthLastYear:
+//            return dateManager.retrieveDate(theme: .thisMonthLastYear)
+//        case .thisDayLastYear:
+//            return dateManager.retrieveDate(theme: .thisDayLastYear)
+//        case .xYearsAgo(let x):
+//            var components = DateComponents()
+//            components.year = -x
+//            guard let startDate = Calendar.current.date(byAdding: components, to: Date().startOfDay) else {
+//                return []
+//            }
+//            guard let endOfToday = Date().endOfDay, let endDate = Calendar.current.date(byAdding: components, to: endOfToday) else {
+//                return []
+//            }
+//            return [startDate, endDate]
+//        case .sundaysXYearsAgo(let x):
+//            var components = DateComponents()
+//            components.weekday = 1
+//            components.year = -x
+//            guard let startDate = Calendar.current.date(byAdding: components, to: Date().startOfDay) else {
+//                return []
+//            }
+//            guard let endOfToday = Date().endOfDay, let endDate = Calendar.current.date(byAdding: components, to: endOfToday) else {
+//                return []
+//            }
+//            return [startDate, endDate]
+//        }
         }
     }
     
     var predicate: NSPredicate {
-        guard let dateHelper = dateHelper else {
+        print("KMCSCThemeProvider helper = \(dateConstructor)")
+        if let startDate = dateConstructor.first, let endOfDate = dateConstructor.last {
+            return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate >= %@ AND creationDate < %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, startDate as NSDate, endOfDate as NSDate)
+        } else {
             return NSPredicate(format: "!((mediaSubtype & %d) == %d)", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue)
         }
-        return NSPredicate(format: "!((mediaSubtype & %d) == %d) AND creationDate >= %@ AND creationDate < %@", PHAssetMediaSubtype.photoScreenshot.rawValue, PHAssetMediaSubtype.photoScreenshot.rawValue, dateHelper as NSDate, Date() as CVarArg)
     }
     
-    var caseTitle: String {
-        switch self {
-        case .ever: return "ever"
-        case .today: return "today"
-        case .yesterday: return "yesterday"
-        case .oneWeekAgo: return "one Week Ago"
-        case .oneMonthAgo: return "one month ago"
-        case .oneYearAgo: return "one year ago"
-        }
-    }
+//    var caseTitle: String {
+//        switch self {
+//        case .ever: return "ever"
+//        case .today: return "today"
+//        case .yesterday: return "yesterday"
+//        case .thisWeekLastYear: return "one Week Ago"
+//        case .thisMonthLastYear: return "one month ago"
+//        case .thisDayLastYear: return "one year ago"
+//        case .xYearsAgo(let x): return "\(x) years ago"
+//        case .sundaysXYearsAgo(let x): return "\(x) sunday ago"
+//        }
+//    }
 }
+
+
+
+
+
+
 
 // MARK: - Nearby
 //////////////////////////////////////////////////////////////////
@@ -129,7 +122,7 @@ enum LocationSelection {
 }
 
 
-extension LocationSelection: PredicateThemeProvider {
+extension LocationSelection: KMCSCPredicateThemeProvider {
     
     var predicate: NSPredicate {
         switch self {
@@ -152,10 +145,24 @@ extension LocationSelection: PredicateThemeProvider {
 // MARK: - Nearby
 //////////////////////////////////////////////////////////////////
 
-
-
-
-
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    var endOfDay: Date? {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)
+    }
+    //
+    //    var thisDayLastYear: Date? {
+    //        var components = DateComponents()
+    //        components.year = -1
+    //        return Calendar.current.date(byAdding: components, to: startOfDay)
+    //    }
+}
 
 
 
