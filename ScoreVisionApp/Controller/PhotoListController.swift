@@ -34,7 +34,7 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getSelfies(_ sender: UIButton) {
         titleTheme = "Selfies"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumSelfPortraits, periodPredicate: .today, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumSelfPortraits, periodPredicate: .yesterday, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
             self.updateCollection(theme)
             //dump(theme)
 
@@ -74,13 +74,6 @@ final class PhotoListController: UIViewController {
                 print("the error here is that \(error)")
         }
     }
-    //albumMyPhotoStream icloud
-    //smartAlbumAllHidden
-    //smartAlbumUserLibrary //s opposed to assets from iCloud Shared Albums
-    
-    //albumCloudShared //An iCloud Shared Photo Stream.
-    //albumMyPhotoStream //The user’s personal iCloud Photo Stream.
-    //smartAlbumLongExposures //
 
     
     @IBAction func getRecentlyAdded(_ sender: UIButton) {

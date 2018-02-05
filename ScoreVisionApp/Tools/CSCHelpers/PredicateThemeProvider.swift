@@ -41,35 +41,6 @@ extension KMCSCTimePeriod: KMCSCPredicateThemeProvider {
             return dateManager.retrieveDate(period: .thisWeekXYearsAgo(x: x))
         case .thisMonthXYearsAgo(let x):
             return dateManager.retrieveDate(period: .thisMonthXYearsAgo(x: x))
-            
-//        case .thisWeekLastYear:
-//            return dateManager.retrieveDate(theme: .thisWeekLastYear)
-//        case .thisMonthLastYear:
-//            return dateManager.retrieveDate(theme: .thisMonthLastYear)
-//        case .thisDayLastYear:
-//            return dateManager.retrieveDate(theme: .thisDayLastYear)
-//        case .xYearsAgo(let x):
-//            var components = DateComponents()
-//            components.year = -x
-//            guard let startDate = Calendar.current.date(byAdding: components, to: Date().startOfDay) else {
-//                return []
-//            }
-//            guard let endOfToday = Date().endOfDay, let endDate = Calendar.current.date(byAdding: components, to: endOfToday) else {
-//                return []
-//            }
-//            return [startDate, endDate]
-//        case .sundaysXYearsAgo(let x):
-//            var components = DateComponents()
-//            components.weekday = 1
-//            components.year = -x
-//            guard let startDate = Calendar.current.date(byAdding: components, to: Date().startOfDay) else {
-//                return []
-//            }
-//            guard let endOfToday = Date().endOfDay, let endDate = Calendar.current.date(byAdding: components, to: endOfToday) else {
-//                return []
-//            }
-//            return [startDate, endDate]
-//        }
         }
     }
     
