@@ -15,6 +15,7 @@ enum KMCSCError: Error {
     case noPotentialAssets
     case noRandomMoments
     case invalidImage
+    case noResults(error: String)
     
     var localizedDescription: String {
         switch self {
@@ -23,6 +24,7 @@ enum KMCSCError: Error {
         case .noRandomMoments: return "KMCSCError no random moments founded"
         case .noPotentialAssets: return "KMCSCError no assets"
         case .invalidImage: return "Invalid Image"
+        case .noResults(let error): return "No results from vision \(error)"
         }
     }
 }

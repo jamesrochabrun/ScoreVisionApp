@@ -60,38 +60,20 @@ final class PhotoListController: UIViewController {
         }
     }
     
-    @IBAction func getLivePhotos(_ sender: UIButton) {
-        titleTheme = "Live Photos"
-
-    }
-    
-    @IBAction func getPortraits(_ sender: UIButton) {
-        titleTheme = "Portraits"
-
-    }
-
-    
-    @IBAction func getRecentlyAdded(_ sender: UIButton) {
-        titleTheme = "Recently added"
-
-    }
-    
     @IBAction func getAllPhotos(_ sender: UIButton) {
         titleTheme = "All photos"
-        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumUserLibrary, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
+        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumUserLibrary, period: .fullRangeOfYear(yearsAgo: 1), justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
             self.updateCollection(theme)
             }.catch { error in
                 print("The error is \(error)")
         }
     }
     
-    @IBAction func getMoments(_ sender: Any) {
-  
-    }
-    
+    // MARK: - Vision stuff
     // ML https://developer.apple.com/machine-learning/
     
     /// Image Classification
+    
     /// 1.-  MLModelSetup  
     lazy var classificationRequest: VNCoreMLRequest = {
         do {
@@ -111,10 +93,35 @@ final class PhotoListController: UIViewController {
             fatalError("Failed to load Vision ML model: \(error)")
         }
     }()
-}
-
-// MARK: - Vision stuff
-extension PhotoListController {
+    
+    /// 2.- Process clasifications
+    func processClassifications(for request: VNRequest, error: Error?) {
+        DispatchQueue.main.async {
+            guard let results = request.results else {
+                self.classificationLabel.text = "Unable to classify image.\n\(error!.localizedDescription)"
+                return
+            }
+            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+            let classifications = results as! [VNClassificationObservation]
+            
+            if classifications.isEmpty {
+                self.classificationLabel.text = "Nothing recognized."
+            } else {
+                // Display top classifications ranked by confidence in the UI.
+                let topClassifications = classifications.prefix(2)
+                let descriptions = topClassifications.map { classification in
+                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
+                    //  The level of confidence normalized to [0, 1] where 1 is most confident
+                    
+                    // The is the label or identifier of a classificaiton request. An example classification could be a string like 'cat' or 'hotdog'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI
+                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
+                }
+                
+                print("Classification: \(descriptions.joined(separator: "\n"))")
+                self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
+            }
+        }
+    }
     
     /// 2.-  PerformRequests
     func updateClassifications(for image: UIImage) {
@@ -137,31 +144,7 @@ extension PhotoListController {
             }
         }
     }
-    
-    func processClassifications(for request: VNRequest, error: Error?) {
-        DispatchQueue.main.async {
-            guard let results = request.results else {
-                self.classificationLabel.text = "Unable to classify image.\n\(error!.localizedDescription)"
-                return
-            }
-            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
-            let classifications = results as! [VNClassificationObservation]
-            
-            if classifications.isEmpty {
-                self.classificationLabel.text = "Nothing recognized."
-            } else {
-                // Display top classifications ranked by confidence in the UI.
-                let topClassifications = classifications.prefix(2)
-                let descriptions = topClassifications.map { classification in
-                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
-                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
-                }
-                self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
-            }
-        }
-    }
 }
-
 
 // MARK: - camera and library picker
 extension PhotoListController: PhotoPickerManagerDelegate {
@@ -189,9 +172,12 @@ extension PhotoListController {
     
     // helper for testing
     private func updateUI(_ images: [UIImage]) {
+        // update the UI
         self.countLabel.text = "\(titleTheme) count: = \(images.count)"
         self.photoListControllerDatasource.updateData(images: images)
         self.photoCollectionView.reloadData()
+        // print the classifications
+        images.map { self.updateClassifications(for: $0) }
     }
     
     private func updateCollection(_ theme: CurationTheme) {

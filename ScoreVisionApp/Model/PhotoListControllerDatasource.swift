@@ -12,6 +12,7 @@ import UIKit
 class PhotoListControllerDatasource: NSObject, UICollectionViewDataSource {
     
     private var images: [UIImage] = []
+    private var titleObservations: [String?] = []
     
     init(images: [UIImage]) {
         self.images = images
@@ -20,6 +21,10 @@ class PhotoListControllerDatasource: NSObject, UICollectionViewDataSource {
     
     func updateData(images: [UIImage]) {
         self.images = images
+    }
+    
+    func updateClassifications(classifications: [String]) {
+        self.titleObservations = classifications
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -32,3 +37,9 @@ class PhotoListControllerDatasource: NSObject, UICollectionViewDataSource {
         return images.count
     }
 }
+
+
+
+
+
+
