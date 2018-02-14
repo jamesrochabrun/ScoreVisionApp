@@ -9,6 +9,9 @@
 import UIKit
 import Photos
 import PromiseKit
+import Vision
+import ImageIO
+import CoreML
 
 final class PhotoListController: UIViewController {
 
@@ -25,6 +28,11 @@ final class PhotoListController: UIViewController {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var photoCollectionView: UICollectionView!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var classificationLabel: UILabel!
+    @IBOutlet weak var collectionClasificationLabel: UILabel!
+    
+    
+    
     var titleTheme: String = ""
     
     override func viewDidLoad() {
@@ -32,76 +40,139 @@ final class PhotoListController: UIViewController {
         self.photoCollectionView.dataSource = photoListControllerDatasource
     }
     
+    // MARK: get Themes
     @IBAction func getSelfies(_ sender: UIButton) {
         titleTheme = "Selfies"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumSelfPortraits, periodPredicate: .yesterday, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumSelfPortraits, period: .fullRangeOfYear(yearsAgo: 1), justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
             self.updateCollection(theme)
-            //dump(theme)
-
             }.catch { error in
-                print("the error here is that \(error)")
+                print("The error is \(error)")
         }
+
     }
     
     @IBAction func getFavorites(_ sender: UIButton) {
         titleTheme = "Favorites"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumFavorites , periodPredicate: .yesterday, justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumFavorites, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
             self.updateCollection(theme)
-            //dump(theme)
-
             }.catch { error in
-                print("the error here is that \(error)")
+                print("The error is \(error)")
         }
     }
     
     @IBAction func getLivePhotos(_ sender: UIButton) {
         titleTheme = "Live Photos"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumLivePhotos, periodPredicate: .thisDayXYearsAgo(x: 1), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
-            self.updateCollection(theme)
-           // dump(theme)
-            }.catch { error in
-                print("the error here is that \(error)")
-        }
+
     }
     
     @IBAction func getPortraits(_ sender: UIButton) {
         titleTheme = "Portraits"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumDepthEffect, periodPredicate: .thisMonthXYearsAgo(x: 1), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
-            self.updateCollection(theme)
-            //dump(theme)
 
-            }.catch { error in
-                print("the error here is that \(error)")
-        }
     }
 
     
     @IBAction func getRecentlyAdded(_ sender: UIButton) {
         titleTheme = "Recently added"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumRecentlyAdded, periodPredicate: .thisDayXYearsAgo(x: 0), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
-            self.updateCollection(theme)
-            //dump(theme)
-            }.catch { error in
-                print("the error here is that \(error)")
-        }
+
     }
     
     @IBAction func getAllPhotos(_ sender: UIButton) {
         titleTheme = "All photos"
-        AssetProvider.getThemeFromSmartAlbum(subType: .smartAlbumUserLibrary, periodPredicate: .thisMonthXYearsAgo(x: 4), justFavorites: false, sortDescriptors: [.creationDate]).themePromise.then { theme in
+        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumUserLibrary, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
             self.updateCollection(theme)
-            //dump(theme)
             }.catch { error in
-                print("the error here is that \(error)")
+                print("The error is \(error)")
         }
     }
-        
     
-    // helper for testing
-    private func updateUI(_ images: [UIImage]) {
-        self.countLabel.text = "\(titleTheme) count: = \(images.count)"
-        self.photoListControllerDatasource.updateData(images: images)
-        self.photoCollectionView.reloadData()
+    @IBAction func getMoments(_ sender: Any) {
+  
+    }
+    
+    // ML https://developer.apple.com/machine-learning/
+    
+    /// Image Classification
+    /// 1.-  MLModelSetup  
+    lazy var classificationRequest: VNCoreMLRequest = {
+        do {
+            /*
+             Use the Swift class `MobileNet` Core ML generates from the model.
+             To use a different Core ML classifier model, add it to the project
+             and replace `MobileNet` with that model's generated Swift class.
+             */
+            let model = try VNCoreMLModel(for: MobileNet().model)
+            
+            let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
+                self?.processClassifications(for: request, error: error)
+            })
+            request.imageCropAndScaleOption = .centerCrop
+            return request
+        } catch {
+            fatalError("Failed to load Vision ML model: \(error)")
+        }
+    }()
+}
+
+// MARK: - Vision stuff
+extension PhotoListController {
+    
+    /// 2.-  PerformRequests
+    func updateClassifications(for image: UIImage) {
+        classificationLabel.text = "Classifying..."
+        
+        let orientation = CGImagePropertyOrientation(image.imageOrientation)
+        guard let ciImage = CIImage(image: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let handler = VNImageRequestHandler(ciImage: ciImage, orientation: orientation)
+            do {
+                try handler.perform([self.classificationRequest])
+            } catch {
+                /*
+                 This handler catches general image processing errors. The `classificationRequest`'s
+                 completion handler ` (_:error:)` catches errors specific
+                 to processing that request.
+                 */
+                print("Failed to perform classification.\n\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func processClassifications(for request: VNRequest, error: Error?) {
+        DispatchQueue.main.async {
+            guard let results = request.results else {
+                self.classificationLabel.text = "Unable to classify image.\n\(error!.localizedDescription)"
+                return
+            }
+            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+            let classifications = results as! [VNClassificationObservation]
+            
+            if classifications.isEmpty {
+                self.classificationLabel.text = "Nothing recognized."
+            } else {
+                // Display top classifications ranked by confidence in the UI.
+                let topClassifications = classifications.prefix(2)
+                let descriptions = topClassifications.map { classification in
+                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
+                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
+                }
+                self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
+            }
+        }
+    }
+}
+
+
+// MARK: - camera and library picker
+extension PhotoListController: PhotoPickerManagerDelegate {
+    
+    func manager(_ manager: PhotoPickerManager, didPickImage image: UIImage) {
+        // here is our image from Library or camera
+        photoImageView.image = image
+        manager.dismissPhotoPicker(animated: true) {
+            print("dismiss")
+            self.updateClassifications(for: image)
+        }
     }
     
     @IBAction func launchLibrary(_ sender: UIButton) {
@@ -113,50 +184,21 @@ final class PhotoListController: UIViewController {
     }
 }
 
-class PhotoListControllerDatasource: NSObject, UICollectionViewDataSource {
-    
-    private var images: [UIImage] = []
-    
-     init(images: [UIImage]) {
-        self.images = images
-        super.init()
-    }
-    
-    func updateData(images: [UIImage]) {
-        self.images = images
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: PhotoCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.photoImageView.image = images[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-}
-
-extension PhotoListController: PhotoPickerManagerDelegate {
-    
-    func manager(_ manager: PhotoPickerManager, didPickImage image: UIImage) {
-        // here is our image from Library or camera
-        photoImageView.image = image
-        manager.dismissPhotoPicker(animated: true) {
-            print("dismiss")
-        }
-    }
-}
-
-// MARK: - Use this just for test result images
+// MARK: - Use this just for test result images collections
 extension PhotoListController {
     
-    private func updateCollection(_ theme: Theme) {
+    // helper for testing
+    private func updateUI(_ images: [UIImage]) {
+        self.countLabel.text = "\(titleTheme) count: = \(images.count)"
+        self.photoListControllerDatasource.updateData(images: images)
+        self.photoCollectionView.reloadData()
+    }
+    
+    private func updateCollection(_ theme: CurationTheme) {
         let options = PHImageRequestOptions()
         options.version = .current
         options.resizeMode = .fast
         options.isSynchronous = false
-        
         for asset in theme.potentialAssets {
             print("KMTEST \(asset.isFavorite)")
         }
@@ -174,7 +216,7 @@ extension PhotoListController {
                 PHImageManager.default().requestImage(for: $0, targetSize: CGSize(width: 800, height: 800), contentMode: .aspectFit, options: options, resultHandler: { response, options in
                     guard let image = response else {
                         print("Big error here")
-                        reject(CSCError.invalidImage)
+                        reject(KMCSCError.invalidImage)
                         return
                     }
                     images.append(image)

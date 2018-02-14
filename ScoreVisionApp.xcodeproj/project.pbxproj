@@ -15,14 +15,20 @@
 		0907A8E42022DBA500E18BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0907A8E22022DBA500E18BFA /* LaunchScreen.storyboard */; };
 		0907A8EF2022DBA500E18BFA /* ScoreVisionAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8EE2022DBA500E18BFA /* ScoreVisionAppTests.swift */; };
 		0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */; };
-		0913CBDA2023834200C19C95 /* CSCProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CBD92023834200C19C95 /* CSCProvider.swift */; };
-		092C13532023D8BC009F85B3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13522023D8BC009F85B3 /* Theme.swift */; };
-		092C13562023D98C009F85B3 /* SortDescriptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */; };
-		092C13582023DA36009F85B3 /* PredicateThemeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */; };
-		092C135A2023E0E1009F85B3 /* CSCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13592023E0E1009F85B3 /* CSCError.swift */; };
 		092C135D202427E6009F85B3 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135C202427E6009F85B3 /* Reusable.swift */; };
 		092C135F20242932009F85B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135E20242932009F85B3 /* PhotoCell.swift */; };
 		092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13612026F0A5009F85B3 /* KMCSDateManager.swift */; };
+		09AC5A472033C1EE009C8EB9 /* KMCSCThemeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A462033C1EE009C8EB9 /* KMCSCThemeProvider.swift */; };
+		09AC5A492033C281009C8EB9 /* MomentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A482033C281009C8EB9 /* MomentBuilder.swift */; };
+		09AC5A4B2033C2A3009C8EB9 /* SmartALbumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A4A2033C2A3009C8EB9 /* SmartALbumBuilder.swift */; };
+		09AC5A4D2033C2B6009C8EB9 /* KMCSCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A4C2033C2B6009C8EB9 /* KMCSCError.swift */; };
+		09AC5A4F2033C2E4009C8EB9 /* KMCSCSortDescriptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A4E2033C2E4009C8EB9 /* KMCSCSortDescriptorProvider.swift */; };
+		09AC5A512033C30E009C8EB9 /* MFYAlbumTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A502033C30E009C8EB9 /* MFYAlbumTheme.swift */; };
+		09AC5A532033C35A009C8EB9 /* CurationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A522033C35A009C8EB9 /* CurationTheme.swift */; };
+		09AC5A552033C423009C8EB9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A542033C423009C8EB9 /* Date+Extensions.swift */; };
+		09AC5A572033D374009C8EB9 /* PhotoListControllerDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A562033D374009C8EB9 /* PhotoListControllerDatasource.swift */; };
+		09AC5A592033DF8E009C8EB9 /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A582033DF8E009C8EB9 /* CGImagePropertyOrientation.swift */; };
+		09AC5A5B2033E247009C8EB9 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A5A2033E247009C8EB9 /* MobileNet.mlmodel */; };
 		DD45B92729D73C04A0EEDB22 /* Pods_ScoreVisionAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */; };
 		E2C01D32339C6945496C1FB6 /* Pods_ScoreVisionApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */; };
 /* End PBXBuildFile section */
@@ -50,14 +56,20 @@
 		0907A8EE2022DBA500E18BFA /* ScoreVisionAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreVisionAppTests.swift; sourceTree = "<group>"; };
 		0907A8F02022DBA500E18BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerManager.swift; sourceTree = "<group>"; };
-		0913CBD92023834200C19C95 /* CSCProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCProvider.swift; sourceTree = "<group>"; };
-		092C13522023D8BC009F85B3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDescriptorProvider.swift; sourceTree = "<group>"; };
-		092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateThemeProvider.swift; sourceTree = "<group>"; };
-		092C13592023E0E1009F85B3 /* CSCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCError.swift; sourceTree = "<group>"; };
 		092C135C202427E6009F85B3 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		092C135E20242932009F85B3 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		092C13612026F0A5009F85B3 /* KMCSDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSDateManager.swift; sourceTree = "<group>"; };
+		09AC5A462033C1EE009C8EB9 /* KMCSCThemeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSCThemeProvider.swift; sourceTree = "<group>"; };
+		09AC5A482033C281009C8EB9 /* MomentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentBuilder.swift; sourceTree = "<group>"; };
+		09AC5A4A2033C2A3009C8EB9 /* SmartALbumBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartALbumBuilder.swift; sourceTree = "<group>"; };
+		09AC5A4C2033C2B6009C8EB9 /* KMCSCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSCError.swift; sourceTree = "<group>"; };
+		09AC5A4E2033C2E4009C8EB9 /* KMCSCSortDescriptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSCSortDescriptorProvider.swift; sourceTree = "<group>"; };
+		09AC5A502033C30E009C8EB9 /* MFYAlbumTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFYAlbumTheme.swift; sourceTree = "<group>"; };
+		09AC5A522033C35A009C8EB9 /* CurationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurationTheme.swift; sourceTree = "<group>"; };
+		09AC5A542033C423009C8EB9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		09AC5A562033D374009C8EB9 /* PhotoListControllerDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListControllerDatasource.swift; sourceTree = "<group>"; };
+		09AC5A582033DF8E009C8EB9 /* CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImagePropertyOrientation.swift; sourceTree = "<group>"; };
+		09AC5A5A2033E247009C8EB9 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAAF1EB20F21AD1F4331045 /* Pods-ScoreVisionAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoreVisionAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScoreVisionAppTests/Pods-ScoreVisionAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoreVisionAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,8 +130,8 @@
 		0907A8D52022DBA500E18BFA /* ScoreVisionApp */ = {
 			isa = PBXGroup;
 			children = (
-				092C135B202427D2009F85B3 /* Protocols */,
 				0907A8D62022DBA500E18BFA /* AppDelegate.swift */,
+				092C135B202427D2009F85B3 /* Protocols */,
 				0907A8FC2022DC8A00E18BFA /* Tools */,
 				0907A8FB2022DC6C00E18BFA /* Controller */,
 				0907A8FA2022DC6700E18BFA /* View */,
@@ -145,6 +157,8 @@
 		0907A8F92022DC5C00E18BFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				09AC5A5A2033E247009C8EB9 /* MobileNet.mlmodel */,
+				09AC5A562033D374009C8EB9 /* PhotoListControllerDatasource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,8 +182,9 @@
 		0907A8FC2022DC8A00E18BFA /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				092C13512023D89D009F85B3 /* CSCHelpers */,
 				0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */,
+				092C13512023D89D009F85B3 /* CSCHelpers */,
+				09AC5A582033DF8E009C8EB9 /* CGImagePropertyOrientation.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -177,12 +192,15 @@
 		092C13512023D89D009F85B3 /* CSCHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				092C13602026EE08009F85B3 /* DateTools */,
-				092C13522023D8BC009F85B3 /* Theme.swift */,
-				0913CBD92023834200C19C95 /* CSCProvider.swift */,
-				092C13552023D98C009F85B3 /* SortDescriptorProvider.swift */,
-				092C13572023DA36009F85B3 /* PredicateThemeProvider.swift */,
-				092C13592023E0E1009F85B3 /* CSCError.swift */,
+				092C13612026F0A5009F85B3 /* KMCSDateManager.swift */,
+				09AC5A462033C1EE009C8EB9 /* KMCSCThemeProvider.swift */,
+				09AC5A482033C281009C8EB9 /* MomentBuilder.swift */,
+				09AC5A4A2033C2A3009C8EB9 /* SmartALbumBuilder.swift */,
+				09AC5A4C2033C2B6009C8EB9 /* KMCSCError.swift */,
+				09AC5A4E2033C2E4009C8EB9 /* KMCSCSortDescriptorProvider.swift */,
+				09AC5A502033C30E009C8EB9 /* MFYAlbumTheme.swift */,
+				09AC5A522033C35A009C8EB9 /* CurationTheme.swift */,
+				09AC5A542033C423009C8EB9 /* Date+Extensions.swift */,
 			);
 			path = CSCHelpers;
 			sourceTree = "<group>";
@@ -193,14 +211,6 @@
 				092C135C202427E6009F85B3 /* Reusable.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		092C13602026EE08009F85B3 /* DateTools */ = {
-			isa = PBXGroup;
-			children = (
-				092C13612026F0A5009F85B3 /* KMCSDateManager.swift */,
-			);
-			path = DateTools;
 			sourceTree = "<group>";
 		};
 		9C7D1DB9D03173608F1BCDB1 /* Pods */ = {
@@ -425,18 +435,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				092C135A2023E0E1009F85B3 /* CSCError.swift in Sources */,
+				09AC5A532033C35A009C8EB9 /* CurationTheme.swift in Sources */,
 				0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */,
+				09AC5A5B2033E247009C8EB9 /* MobileNet.mlmodel in Sources */,
 				0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */,
+				09AC5A472033C1EE009C8EB9 /* KMCSCThemeProvider.swift in Sources */,
 				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,
+				09AC5A512033C30E009C8EB9 /* MFYAlbumTheme.swift in Sources */,
 				092C135D202427E6009F85B3 /* Reusable.swift in Sources */,
-				092C13532023D8BC009F85B3 /* Theme.swift in Sources */,
-				0913CBDA2023834200C19C95 /* CSCProvider.swift in Sources */,
-				092C13562023D98C009F85B3 /* SortDescriptorProvider.swift in Sources */,
-				092C13582023DA36009F85B3 /* PredicateThemeProvider.swift in Sources */,
+				09AC5A4D2033C2B6009C8EB9 /* KMCSCError.swift in Sources */,
+				09AC5A552033C423009C8EB9 /* Date+Extensions.swift in Sources */,
 				092C135F20242932009F85B3 /* PhotoCell.swift in Sources */,
+				09AC5A492033C281009C8EB9 /* MomentBuilder.swift in Sources */,
+				09AC5A572033D374009C8EB9 /* PhotoListControllerDatasource.swift in Sources */,
 				0907A8DF2022DBA500E18BFA /* ScoreVisionApp.xcdatamodeld in Sources */,
+				09AC5A4F2033C2E4009C8EB9 /* KMCSCSortDescriptorProvider.swift in Sources */,
 				092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */,
+				09AC5A592033DF8E009C8EB9 /* CGImagePropertyOrientation.swift in Sources */,
+				09AC5A4B2033C2A3009C8EB9 /* SmartALbumBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
