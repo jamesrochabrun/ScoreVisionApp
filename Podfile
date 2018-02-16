@@ -7,6 +7,7 @@ target 'ScoreVisionApp' do
 
   # Pods for ScoreVisionApp
 	pod "PromiseKit", "~> 4.0"
+ 	pod 'Clarifai-Apple-SDK', '3.0.0-beta15'
 
 
   target 'ScoreVisionAppTests' do

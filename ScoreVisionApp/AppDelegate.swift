@@ -8,16 +8,30 @@
 
 import UIKit
 import CoreData
+import Clarifai
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    static let clarifyAPIKey = "d4087cf998084f8493d5c34bc5175bc9"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+      
         return true
+    }
+    
+    private func setUpClarify() {
+        Clarifai.sharedInstance().start(apiKey: AppDelegate.clarifyAPIKey)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleModelDidBecomeAvailable), name: NSNotification.Name.CAIModelDidBecomeAvailable , object: nil)
+    }
+    
+    @objc func handleModelDidBecomeAvailable(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let modelId = userInfo[NSNotification.Name.CAIModelDidBecomeAvailable] as? String
+            print("THE MODEL ID IS \(modelId)")
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -31,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        // Called as part of the transition from the background to the active state ; here you can undo many of the changes made on entering the background.
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

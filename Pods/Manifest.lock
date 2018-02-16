@@ -1,4 +1,5 @@
 PODS:
+  - Clarifai-Apple-SDK (3.0.0-beta15)
   - PromiseKit (4.5.2):
     - PromiseKit/Foundation (= 4.5.2)
     - PromiseKit/QuartzCore (= 4.5.2)
@@ -12,11 +13,13 @@ PODS:
     - PromiseKit/CorePromise
 
 DEPENDENCIES:
+  - Clarifai-Apple-SDK (= 3.0.0-beta15)
   - PromiseKit (~> 4.0)
 
 SPEC CHECKSUMS:
+  Clarifai-Apple-SDK: 0ea4845b72a0c46fecddda4b1491cc5fb70cfcdb
   PromiseKit: 743e497a5f505a470d3bbbf4ce0663c1268af0a4
 
-PODFILE CHECKSUM: 3edf0d44276816691cae953fdf2d63e0fa07c001
+PODFILE CHECKSUM: f57f1be0a9b9a4a66d3f8e22118a9906b73c6df0
 
 COCOAPODS: 1.3.1
