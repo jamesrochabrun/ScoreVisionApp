@@ -166,6 +166,18 @@ extension PhotoListController: PhotoPickerManagerDelegate {
     }
 }
 
+// MARK: - UItableviewdelegate
+extension PhotoListController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath),
+            let photoCell = cell as? PhotoCell,
+            let image = photoCell.photoImageView.image {
+            self.updateClassifications(for: image)
+        }
+    }
+}
+
 // MARK: - Use this just for test result images collections
 extension PhotoListController {
     
@@ -175,8 +187,6 @@ extension PhotoListController {
         self.countLabel.text = "\(titleTheme) count: = \(assets.count)"
         self.photoListControllerDatasource.updateData(assets: assets)
         self.photoCollectionView.reloadData()
-        // print the classifications
-      //  images.map { self.updateClassifications(for: $0) }
     }
     
     private func updateCollection(_ theme: CurationTheme) {
