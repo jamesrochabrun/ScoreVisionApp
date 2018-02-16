@@ -23,6 +23,7 @@ class PhotoPickerManager: NSObject {
     private let imagePickerController = UIImagePickerController()
     private let presentingController: UIViewController
     weak var delegate: PhotoPickerManagerDelegate?
+    private let imageManager = PHCachingImageManager()
     
     init(presentingController: UIViewController) {
         self.presentingController = presentingController
@@ -66,24 +67,41 @@ extension PhotoPickerManager: UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        /// getting original image for camera
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.delegate?.manager(self, didPickImage: image)
-            
-        } else {
-            guard let asset = info[UIImagePickerControllerPHAsset] as? PHAsset else {
-                return
-            }
+        if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
+            dump(asset)
             let options = PHImageRequestOptions()
             options.version = .current
             options.resizeMode = .fast
             options.isSynchronous = true
             let bestTargetSize: CGSize = CGSize(width: 800, height: 800)
-            PHImageManager.default().requestImage(for: asset, targetSize: bestTargetSize, contentMode: .aspectFit, options: options) { (response, options) in
+            imageManager.requestImage(for: asset, targetSize: bestTargetSize, contentMode: .aspectFit, options: options) { (response, options) in
                 guard let image = response else { return }
                 self.delegate?.manager(self, didPickImage: image)
             }
+        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            /// getting original image for camera
+            self.delegate?.manager(self, didPickImage: image)
         }
+    }
+    
+    private func printAssetMetaData(_ asset: PHAsset) {
+    
+        var assetMetadata = """
+            asset MediaType \(asset.mediaType),
+        asset mediaSubtypes \(asset.mediaSubtypes),
+        asset sourceType \(asset.sourceType),
+        asset pixelWidth \(asset.pixelWidth),
+        asset pixelHeight \(asset.pixelHeight),
+        asset creationDate \(asset.creationDate),
+        asset modificationDate \(asset.modificationDate),
+        asset location \(asset.location),
+        asset duratiom \(asset.duration),
+        asset isFavorite \(asset.isFavorite),
+        asset isHidden \(asset.isHidden),
+        asset burstIdnetifier  \(asset.burstIdentifier),
+        asset butsSelectionTypes \(asset.burstSelectionTypes),
+        asset representsBurst \(asset.representsBurst)
+       """
     }
 }
 

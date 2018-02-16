@@ -30,8 +30,6 @@ final class PhotoListController: UIViewController {
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var classificationLabel: UILabel!
     @IBOutlet weak var collectionClasificationLabel: UILabel!
-
-    
     var titleTheme: String = ""
     
     override func viewDidLoad() {
@@ -42,7 +40,7 @@ final class PhotoListController: UIViewController {
     // MARK: get Themes
     @IBAction func getSelfies(_ sender: UIButton) {
         titleTheme = "Selfies"
-        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumSelfPortraits, period: .fullRangeOfYear(yearsAgo: 1), justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
+        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumSelfPortraits, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
             self.updateCollection(theme)
             }.catch { error in
                 print("The error is \(error)")
@@ -174,6 +172,7 @@ extension PhotoListController: UICollectionViewDelegate {
             let photoCell = cell as? PhotoCell,
             let image = photoCell.photoImageView.image {
             self.updateClassifications(for: image)
+            print("KMIMAGE = \(image.cgImage)")
         }
     }
 }

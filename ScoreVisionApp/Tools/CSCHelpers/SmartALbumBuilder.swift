@@ -93,9 +93,23 @@ extension KMCSCThemeBuilder.SmartAlbumType: ThemeProvider {
                 
                 let assetResult = PHAsset.fetchAssets(in: assetCollection, options: options)
                 assetResult.enumerateObjects { asset, index, stop in
+                    
+                    // Baby step 1 -- TODO: whatever you want here for filter assets
+                    // conditions for filtering?
+                    // date?
+                    var assetDates = asset.creationDate!.rounded(minutes: 5, rounding: .round)
                     assets.append(asset)
-                }
+//                    print("KMASSET height \(asset.pixelHeight)")
+//                    print("KMASSET width \(asset.pixelWidth)")
+//                    print("KMASSET location \(asset.location)")
+//                    print("KMASSET localIdentifier \(asset.localIdentifier)")
+                    print("KMASSET burstIdentifier \(asset.burstIdentifier)")
+                    print("KMASSET burstSelectionTypes \(asset.burstSelectionTypes)")
+                    print("KMASSET duration \(asset.duration)")
+                    print("KMASSET representsBurst \(asset.representsBurst)")
                 
+                }
+  
                 /// Construct the AlbumTheme
                 let mFYAlbumTheme = MFYAlbumTheme(albumThemeTitle: nil, albumThemeType: subType.themeTitle, periodThemeTitle: period.periodThemeTitle)
                 
@@ -118,6 +132,30 @@ extension KMCSCThemeBuilder.SmartAlbumType: ThemeProvider {
     }
 }
 
+
+enum DateRoundingType {
+    case round
+    case ceil
+    case floor
+}
+
+extension Date {
+    func rounded(minutes: TimeInterval, rounding: DateRoundingType = .round) -> Date {
+        return rounded(seconds: minutes * 60, rounding: rounding)
+    }
+    func rounded(seconds: TimeInterval, rounding: DateRoundingType = .round) -> Date {
+        var roundedInterval: TimeInterval = 0
+        switch rounding  {
+        case .round:
+            roundedInterval = (timeIntervalSinceReferenceDate / seconds).rounded() * seconds
+        case .ceil:
+            roundedInterval = ceil(timeIntervalSinceReferenceDate / seconds) * seconds
+        case .floor:
+            roundedInterval = floor(timeIntervalSinceReferenceDate / seconds) * seconds
+        }
+        return Date(timeIntervalSinceReferenceDate: roundedInterval)
+    }
+}
 
 /* Use this in the future or remove it if we identify a better way to get images based on distance
  private func getNearby(from period: MFYImageTheme, sortDescriptors: [SortProvider]) -> Promise<CurationTheme> {
