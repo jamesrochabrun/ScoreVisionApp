@@ -8,19 +8,22 @@
 
 import Foundation
 import UIKit
+import Photos
 
 class PhotoListControllerDatasource: NSObject, UICollectionViewDataSource {
     
-    private var images: [UIImage] = []
+    private var assets: [PHAsset] = []
     private var titleObservations: [String?] = []
+    private let imageManager = PHCachingImageManager()
+
     
-    init(images: [UIImage]) {
-        self.images = images
+    init(assets: [PHAsset]) {
+        self.assets = assets
         super.init()
     }
     
-    func updateData(images: [UIImage]) {
-        self.images = images
+    func updateData(assets: [PHAsset]) {
+        self.assets = assets
     }
     
     func updateClassifications(classifications: [String]) {
@@ -29,12 +32,22 @@ class PhotoListControllerDatasource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PhotoCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.photoImageView.image = images[indexPath.row]
+        
+        let options = PHImageRequestOptions()
+        options.version = .current
+        options.resizeMode = .fast
+        options.isSynchronous = true
+        let asset = assets[indexPath.row]
+        imageManager.requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: options, resultHandler: { response, options in
+            if let image = response {
+                cell.photoImageView.image = image
+            }
+        })
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return assets.count
     }
 }
 

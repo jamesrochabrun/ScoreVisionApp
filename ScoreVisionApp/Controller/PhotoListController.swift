@@ -22,7 +22,7 @@ final class PhotoListController: UIViewController {
     }()
     
     lazy var photoListControllerDatasource: PhotoListControllerDatasource = {
-        return PhotoListControllerDatasource(images: [])
+        return PhotoListControllerDatasource(assets: [])
     }()
     
     @IBOutlet weak var photoImageView: UIImageView!
@@ -30,8 +30,7 @@ final class PhotoListController: UIViewController {
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var classificationLabel: UILabel!
     @IBOutlet weak var collectionClasificationLabel: UILabel!
-    
-    
+
     
     var titleTheme: String = ""
     
@@ -62,7 +61,7 @@ final class PhotoListController: UIViewController {
     
     @IBAction func getAllPhotos(_ sender: UIButton) {
         titleTheme = "All photos"
-        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumUserLibrary, period: .fullRangeOfYear(yearsAgo: 1), justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
+        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumUserLibrary, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
             self.updateCollection(theme)
             }.catch { error in
                 print("The error is \(error)")
@@ -171,47 +170,17 @@ extension PhotoListController: PhotoPickerManagerDelegate {
 extension PhotoListController {
     
     // helper for testing
-    private func updateUI(_ images: [UIImage]) {
+    private func updateUI(_ assets: [PHAsset]) {
         // update the UI
-        self.countLabel.text = "\(titleTheme) count: = \(images.count)"
-        self.photoListControllerDatasource.updateData(images: images)
+        self.countLabel.text = "\(titleTheme) count: = \(assets.count)"
+        self.photoListControllerDatasource.updateData(assets: assets)
         self.photoCollectionView.reloadData()
         // print the classifications
-        images.map { self.updateClassifications(for: $0) }
+      //  images.map { self.updateClassifications(for: $0) }
     }
     
     private func updateCollection(_ theme: CurationTheme) {
-        let options = PHImageRequestOptions()
-        options.version = .current
-        options.resizeMode = .fast
-        options.isSynchronous = false
-        for asset in theme.potentialAssets {
-            print("KMTEST \(asset.isFavorite)")
-        }
-        self.createAndReturnImages(with :theme.potentialAssets, options: options).then { images in
-            self.updateUI(images)
-            }.catch { error in
-                print("the error here is \(error)")
-        }
-    }
-    
-    private func createAndReturnImages(with assets: [PHAsset], options: PHImageRequestOptions) -> Promise<[UIImage]> {
-        return Promise { fullfill, reject in
-            var images: [UIImage] = []
-            let _ = assets.map {
-                PHImageManager.default().requestImage(for: $0, targetSize: CGSize(width: 800, height: 800), contentMode: .aspectFit, options: options, resultHandler: { response, options in
-                    guard let image = response else {
-                        print("Big error here")
-                        reject(KMCSCError.invalidImage)
-                        return
-                    }
-                    images.append(image)
-                })
-            }
-            DispatchQueue.main.async {
-                fullfill(images)
-            }
-        }
+        self.updateUI(theme.potentialAssets)
     }
 }
 
