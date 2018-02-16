@@ -94,8 +94,13 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
         }
     }
     
-    // MARK: - Want a set of moments based on a time period?
-    private func momentsTheme(subType: PHAssetCollectionSubtype, period: KMCSDateManager, justFavorites: Bool, sortDescriptors: [SortProvider], localytics: KMCSCMFYLocaytics?) -> Promise<[CurationTheme]> {
+    // MARK: - Want a s et of moments based on a time period? Your Moments
+    /// Here the period startDate and EndDate are associated to the album not the assets.
+    private func momentsTheme(subType: PHAssetCollectionSubtype,
+                              period: KMCSDateManager,
+                              justFavorites: Bool,
+                              sortDescriptors: [SortProvider],
+                              localytics: KMCSCMFYLocaytics?) -> Promise<[CurationTheme]> {
         
         return Promise { fullfill, reject in
             DispatchQueue.global(qos: .background).async {
@@ -117,7 +122,7 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
                         let options = PHFetchOptions.init()
                         
                         var predicates: [NSPredicate] = []
-                        let subTypePredicate = subType.predicate
+                        let subTypePredicate = subType.predicate///no ScreenShots and !isHidden
                         predicates.append(subTypePredicate)
                         
                         if justFavorites {
