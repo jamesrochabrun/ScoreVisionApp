@@ -15,6 +15,9 @@
 		0907A8E42022DBA500E18BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0907A8E22022DBA500E18BFA /* LaunchScreen.storyboard */; };
 		0907A8EF2022DBA500E18BFA /* ScoreVisionAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8EE2022DBA500E18BFA /* ScoreVisionAppTests.swift */; };
 		0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */; };
+		090BF0E1203A39E900254C57 /* KairosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E0203A39E900254C57 /* KairosAPI.swift */; };
+		090BF0E3203A3A0800254C57 /* Detect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E2203A3A0800254C57 /* Detect.swift */; };
+		090BF0E5203A3A2400254C57 /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E4203A3A2400254C57 /* Enroll.swift */; };
 		092C135D202427E6009F85B3 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135C202427E6009F85B3 /* Reusable.swift */; };
 		092C135F20242932009F85B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135E20242932009F85B3 /* PhotoCell.swift */; };
 		092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13612026F0A5009F85B3 /* KMCSDateManager.swift */; };
@@ -56,6 +59,10 @@
 		0907A8EE2022DBA500E18BFA /* ScoreVisionAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreVisionAppTests.swift; sourceTree = "<group>"; };
 		0907A8F02022DBA500E18BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerManager.swift; sourceTree = "<group>"; };
+		090BF0DD203A362800254C57 /* Kairos-SDK-iOS-Swift */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Kairos-SDK-iOS-Swift"; sourceTree = "<group>"; };
+		090BF0E0203A39E900254C57 /* KairosAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosAPI.swift; sourceTree = "<group>"; };
+		090BF0E2203A3A0800254C57 /* Detect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detect.swift; sourceTree = "<group>"; };
+		090BF0E4203A3A2400254C57 /* Enroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enroll.swift; sourceTree = "<group>"; };
 		092C135C202427E6009F85B3 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		092C135E20242932009F85B3 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		092C13612026F0A5009F85B3 /* KMCSDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSDateManager.swift; sourceTree = "<group>"; };
@@ -101,6 +108,7 @@
 		03A99B48C560F427FF299AB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				090BF0DD203A362800254C57 /* Kairos-SDK-iOS-Swift */,
 				1C4D2F7C9982C47C2F64DB2D /* Pods_ScoreVisionApp.framework */,
 				8B7E66C8B3CB319A20885CCF /* Pods_ScoreVisionAppTests.framework */,
 			);
@@ -182,11 +190,22 @@
 		0907A8FC2022DC8A00E18BFA /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				090BF0DA203A323600254C57 /* Exploration */,
 				0907A8FD2022DC9A00E18BFA /* PhotoPickerManager.swift */,
 				092C13512023D89D009F85B3 /* CSCHelpers */,
 				09AC5A582033DF8E009C8EB9 /* CGImagePropertyOrientation.swift */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		090BF0DA203A323600254C57 /* Exploration */ = {
+			isa = PBXGroup;
+			children = (
+				090BF0E0203A39E900254C57 /* KairosAPI.swift */,
+				090BF0E2203A3A0800254C57 /* Detect.swift */,
+				090BF0E4203A3A2400254C57 /* Enroll.swift */,
+			);
+			path = Exploration;
 			sourceTree = "<group>";
 		};
 		092C13512023D89D009F85B3 /* CSCHelpers */ = {
@@ -437,8 +456,10 @@
 			files = (
 				09AC5A532033C35A009C8EB9 /* CurationTheme.swift in Sources */,
 				0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */,
+				090BF0E5203A3A2400254C57 /* Enroll.swift in Sources */,
 				09AC5A5B2033E247009C8EB9 /* MobileNet.mlmodel in Sources */,
 				0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */,
+				090BF0E3203A3A0800254C57 /* Detect.swift in Sources */,
 				09AC5A472033C1EE009C8EB9 /* KMCSCThemeProvider.swift in Sources */,
 				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,
 				09AC5A512033C30E009C8EB9 /* MFYAlbumTheme.swift in Sources */,
@@ -449,6 +470,7 @@
 				09AC5A492033C281009C8EB9 /* MomentBuilder.swift in Sources */,
 				09AC5A572033D374009C8EB9 /* PhotoListControllerDatasource.swift in Sources */,
 				0907A8DF2022DBA500E18BFA /* ScoreVisionApp.xcdatamodeld in Sources */,
+				090BF0E1203A39E900254C57 /* KairosAPI.swift in Sources */,
 				09AC5A4F2033C2E4009C8EB9 /* KMCSCSortDescriptorProvider.swift in Sources */,
 				092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */,
 				09AC5A592033DF8E009C8EB9 /* CGImagePropertyOrientation.swift in Sources */,

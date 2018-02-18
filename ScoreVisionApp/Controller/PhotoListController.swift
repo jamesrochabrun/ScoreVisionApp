@@ -31,6 +31,7 @@ final class PhotoListController: UIViewController {
     @IBOutlet weak var classificationLabel: UILabel!
     @IBOutlet weak var collectionClasificationLabel: UILabel!
     var titleTheme: String = ""
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,6 @@ final class PhotoListController: UIViewController {
             }.catch { error in
                 print("The error is \(error)")
         }
-
     }
     
     @IBAction func getFavorites(_ sender: UIButton) {
@@ -64,6 +64,11 @@ final class PhotoListController: UIViewController {
             }.catch { error in
                 print("The error is \(error)")
         }
+        makeKairoRequest()
+    }
+    
+    private func makeKairoRequest() {
+        KairosAPI.sharedInstance.exampleEnroll()
     }
     
     // MARK: - Vision stuff
