@@ -21,6 +21,7 @@
 		090BF0E7203A6BF500254C57 /* Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E6203A6BF500254C57 /* Verify.swift */; };
 		090BF0E9203A79E500254C57 /* Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E8203A79E500254C57 /* Recognize.swift */; };
 		090BF0EB203A7F9400254C57 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0EA203A7F9400254C57 /* Emotion.swift */; };
+		0911AC54203B5CBD0052F3A5 /* ObjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0911AC53203B5CBD0052F3A5 /* ObjectsController.swift */; };
 		092C135D202427E6009F85B3 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135C202427E6009F85B3 /* Reusable.swift */; };
 		092C135F20242932009F85B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135E20242932009F85B3 /* PhotoCell.swift */; };
 		092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13612026F0A5009F85B3 /* KMCSDateManager.swift */; };
@@ -69,6 +70,7 @@
 		090BF0E6203A6BF500254C57 /* Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verify.swift; sourceTree = "<group>"; };
 		090BF0E8203A79E500254C57 /* Recognize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recognize.swift; sourceTree = "<group>"; };
 		090BF0EA203A7F9400254C57 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
+		0911AC53203B5CBD0052F3A5 /* ObjectsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsController.swift; sourceTree = "<group>"; };
 		092C135C202427E6009F85B3 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		092C135E20242932009F85B3 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		092C13612026F0A5009F85B3 /* KMCSDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSDateManager.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				0907A8D82022DBA500E18BFA /* PhotoListController.swift */,
+				0911AC53203B5CBD0052F3A5 /* ObjectsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				092C135D202427E6009F85B3 /* Reusable.swift in Sources */,
 				090BF0EB203A7F9400254C57 /* Emotion.swift in Sources */,
 				09AC5A4D2033C2B6009C8EB9 /* KMCSCError.swift in Sources */,
+				0911AC54203B5CBD0052F3A5 /* ObjectsController.swift in Sources */,
 				09AC5A552033C423009C8EB9 /* Date+Extensions.swift in Sources */,
 				092C135F20242932009F85B3 /* PhotoCell.swift in Sources */,
 				09AC5A492033C281009C8EB9 /* MomentBuilder.swift in Sources */,

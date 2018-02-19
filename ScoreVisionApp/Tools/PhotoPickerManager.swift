@@ -16,7 +16,7 @@ enum CameraSourceType {
 }
 
 protocol PhotoPickerManagerDelegate: class {
-    func manager(_ manager: PhotoPickerManager, didPickImage image: UIImage)
+    func manager(_ manager: PhotoPickerManager, didPickImage image: UIImage, asset: PHAsset?)
 }
 class PhotoPickerManager: NSObject {
     
@@ -76,19 +76,11 @@ extension PhotoPickerManager: UIImagePickerControllerDelegate, UINavigationContr
             let bestTargetSize: CGSize = CGSize(width: 800, height: 800)
             imageManager.requestImage(for: asset, targetSize: bestTargetSize, contentMode: .aspectFit, options: options) { (response, options) in
                 guard let image = response else { return }
-                self.delegate?.manager(self, didPickImage: image)
-                // KairosAPI.sharedInstance.exampleDetect(image)
-
-                asset.getURL(completionHandler: { url in
-                    KairosAPI.sharedInstance.exampleDetect(String(describing: url!))
-                   // KairosAPI.sharedInstance.exampleVerify(String(describing: url!))
-                  //  KairosAPI.sharedInstance.exampleRecognize(String(describing: url!))
-
-                })
+                self.delegate?.manager(self, didPickImage: image, asset: asset)
             }
         } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             /// getting original image for camera
-            self.delegate?.manager(self, didPickImage: image)
+            self.delegate?.manager(self, didPickImage: image, asset: nil)
         }
     }
     

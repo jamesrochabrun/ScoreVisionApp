@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 struct KairosConfig {
     static let app_id = "5c15422d"
     static let app_key = "9bcf14f85b7403ece74ed9f2ef6ee408"

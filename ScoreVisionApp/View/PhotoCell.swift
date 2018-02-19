@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 final class PhotoCell: UICollectionViewCell {
+    
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var clasificationLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
         photoImageView.image = nil
-        clasificationLabel.text = nil
     }
 }

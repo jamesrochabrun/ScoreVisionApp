@@ -29,13 +29,8 @@ extension KairosAPI {
         KairosAPI.sharedInstance.request(method: "recognize",  data: jsonBody) { data in
             
             if let images = ((data as? [String : AnyObject])!["images"]) {
-
                 print("IMAGEs \(images)")
             }
-            
         }
     }
-    
-    
-    
 }
