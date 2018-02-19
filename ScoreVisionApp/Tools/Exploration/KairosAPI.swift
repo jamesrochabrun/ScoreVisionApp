@@ -27,13 +27,25 @@ public class KairosAPI {
     }
     
     static var sharedInstance = KairosAPI(app_id: KairosConfig.app_id, app_key: KairosConfig.app_key)
-//    
-//    public func convertImageToBase64String(file: String) -> String {
-//        let image = UIImage(named: file)
-//        let imageData = UIImageJPEGRepresentation(image!, 0)
-//        let base64String = imageData?.base64EncodedString(options:[])
-//        return base64String!
-//    }
+    
+    // use this for images
+    public func convertImageToBase64String(_ image: UIImage) -> String {
+        let imageData = UIImageJPEGRepresentation(image, 0)
+        let base64String = imageData?.base64EncodedString(options:[])
+        return base64String!
+    }
+    
+    // use this for file paths
+    public func convertImageFileToBase64String(file: String) -> String {
+        
+        let imgData = try! Data(contentsOf: (URL(string: file))!)
+        let image = UIImage(data: imgData)
+        
+       // let image = UIImage(named: file)
+        let imageData = UIImageJPEGRepresentation(image!, 0)
+        let base64String = imageData?.base64EncodedString(options:[])
+        return base64String!
+    }
     
     // Kairos API - HTTP Request
     public func send(url:String, data: Dictionary<String, Any>? = [:], httpType: String, taskCallback: @escaping (Bool, AnyObject, AnyObject?) -> ()) -> Void {
@@ -60,6 +72,8 @@ public class KairosAPI {
                 let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: [])
                 let jsonErrors = (jsonResponse as? [String : AnyObject])?["Errors"]
                 
+                print("JSON \(jsonResponse)")
+                
                 self.headers = response as? HTTPURLResponse
                 
                 if let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode, jsonErrors == nil {
@@ -69,19 +83,20 @@ public class KairosAPI {
                 }
             }
         })
-        
         task.resume()
     }
     
     public func getError(errors: AnyObject?) -> Void {
-        let errorCode = self.headers!.statusCode
-        let errorMessage = "Could not get response"
+        var errorCode = self.headers!.statusCode
+        var errorMessage = "Could not get response"
         
         if errors != nil {
-//            errorCode = (errors![0] as? [String : AnyObject])!["ErrCode"] as! Int
-//            errorMessage = (errors![0] as? [String : AnyObject])!["Message"] as! String
+            
+            if let errors = errors as? [[String: AnyObject]], let firstError = errors.first  {
+                errorCode = firstError["ErrCode"] as? Int ?? self.headers!.statusCode
+                errorMessage = firstError["Message"] as? String ?? "Could not get response"
+            }
         }
-        
         print("Error (\(errorCode)): \(errorMessage)")
     }
     
@@ -110,7 +125,11 @@ public class KairosAPI {
             }
             
             // else pass the data along
-            callback(data)
+            DispatchQueue.main.async {
+                callback(data)
+            }
         }
     }
 }
+
+

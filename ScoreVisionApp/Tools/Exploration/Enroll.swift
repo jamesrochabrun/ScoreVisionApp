@@ -8,17 +8,22 @@
 
 import Foundation
 
-/// Signup for a free Kairos API credentials at: https://developer.kairos.com/signup
 
 // Example - Enroll
 extension KairosAPI {
     
-     func exampleEnroll() {
+    /*
+      Takes a photo, finds the faces within it, and stores the faces into a gallery you create.To enroll someone into a gallery, all you need to do is submit a JPG or PNG photo. You can submit the photo either as a publicly accessible URL, Base64 encoded photo or as a file upload.Next you need to choose an identifier for the person being enrolled. The identifier could be their name ("Bob"), something unique to your app ("ABC123xyz"), or anything meaningful for you. We call that identifier "subject_id".You also need to pick a name for the gallery we are storing your faces in. We`ve called this "gallery_name". If you had used that gallery name before, we will just add your new face to it, otherwise we will create a new gallery for you.Finally, we have some advanced options available for your use. We have set these options to sensible defaults, but sometimes there is a need to override them and we have provided that facility for you.
+     */
+    
+    func exampleEnroll(_ file: String) {
         // setup json request params, with image url
+        let base64ImageData = KairosAPI.sharedInstance.convertImageFileToBase64String(file: file)
+        
         let jsonBody = [
-            "image": "https://media.kairos.com/test1.jpg",
-            "gallery_name": "kairos-test",
-            "subject_id": "test1"
+            "image": base64ImageData,
+            "gallery_name": "family",
+            "subject_id": "sasha"
         ]
         KairosAPI.sharedInstance.request(method: "enroll", data: jsonBody) { data in
             // check image key exist and get data

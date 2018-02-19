@@ -64,11 +64,6 @@ final class PhotoListController: UIViewController {
             }.catch { error in
                 print("The error is \(error)")
         }
-        makeKairoRequest()
-    }
-    
-    private func makeKairoRequest() {
-        KairosAPI.sharedInstance.exampleEnroll()
     }
     
     // MARK: - Vision stuff
@@ -177,7 +172,7 @@ extension PhotoListController: UICollectionViewDelegate {
             let photoCell = cell as? PhotoCell,
             let image = photoCell.photoImageView.image {
             self.updateClassifications(for: image)
-            print("KMIMAGE = \(image.cgImage)")
+            //KairosAPI.sharedInstance.exampleDetect(image)            
         }
     }
 }
@@ -197,6 +192,7 @@ extension PhotoListController {
         self.updateUI(theme.potentialAssets)
     }
 }
+
 
 
 

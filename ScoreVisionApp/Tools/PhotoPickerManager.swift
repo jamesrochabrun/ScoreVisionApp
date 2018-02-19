@@ -68,7 +68,7 @@ extension PhotoPickerManager: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
-            dump(asset)
+//            dump(asset)
             let options = PHImageRequestOptions()
             options.version = .current
             options.resizeMode = .fast
@@ -77,6 +77,14 @@ extension PhotoPickerManager: UIImagePickerControllerDelegate, UINavigationContr
             imageManager.requestImage(for: asset, targetSize: bestTargetSize, contentMode: .aspectFit, options: options) { (response, options) in
                 guard let image = response else { return }
                 self.delegate?.manager(self, didPickImage: image)
+                // KairosAPI.sharedInstance.exampleDetect(image)
+
+                asset.getURL(completionHandler: { url in
+                    KairosAPI.sharedInstance.exampleDetect(String(describing: url!))
+                   // KairosAPI.sharedInstance.exampleVerify(String(describing: url!))
+                  //  KairosAPI.sharedInstance.exampleRecognize(String(describing: url!))
+
+                })
             }
         } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             /// getting original image for camera
@@ -105,6 +113,32 @@ extension PhotoPickerManager: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
+
+extension PHAsset {
+    
+    func getURL(completionHandler : @escaping ((_ responseURL : URL?) -> Void)){
+        if self.mediaType == .image {
+            let options: PHContentEditingInputRequestOptions = PHContentEditingInputRequestOptions()
+            options.canHandleAdjustmentData = {(adjustmeta: PHAdjustmentData) -> Bool in
+                return true
+            }
+            self.requestContentEditingInput(with: options, completionHandler: {(contentEditingInput: PHContentEditingInput?, info: [AnyHashable : Any]) -> Void in
+                completionHandler(contentEditingInput!.fullSizeImageURL as URL?)
+            })
+        } else if self.mediaType == .video {
+            let options: PHVideoRequestOptions = PHVideoRequestOptions()
+            options.version = .original
+            PHImageManager.default().requestAVAsset(forVideo: self, options: options, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [AnyHashable : Any]?) -> Void in
+                if let urlAsset = asset as? AVURLAsset {
+                    let localVideoUrl: URL = urlAsset.url as URL
+                    completionHandler(localVideoUrl)
+                } else {
+                    completionHandler(nil)
+                }
+            })
+        }
+    }
+}
 
 
 

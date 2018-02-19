@@ -18,6 +18,9 @@
 		090BF0E1203A39E900254C57 /* KairosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E0203A39E900254C57 /* KairosAPI.swift */; };
 		090BF0E3203A3A0800254C57 /* Detect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E2203A3A0800254C57 /* Detect.swift */; };
 		090BF0E5203A3A2400254C57 /* Enroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E4203A3A2400254C57 /* Enroll.swift */; };
+		090BF0E7203A6BF500254C57 /* Verify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E6203A6BF500254C57 /* Verify.swift */; };
+		090BF0E9203A79E500254C57 /* Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0E8203A79E500254C57 /* Recognize.swift */; };
+		090BF0EB203A7F9400254C57 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090BF0EA203A7F9400254C57 /* Emotion.swift */; };
 		092C135D202427E6009F85B3 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135C202427E6009F85B3 /* Reusable.swift */; };
 		092C135F20242932009F85B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135E20242932009F85B3 /* PhotoCell.swift */; };
 		092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13612026F0A5009F85B3 /* KMCSDateManager.swift */; };
@@ -63,6 +66,9 @@
 		090BF0E0203A39E900254C57 /* KairosAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosAPI.swift; sourceTree = "<group>"; };
 		090BF0E2203A3A0800254C57 /* Detect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detect.swift; sourceTree = "<group>"; };
 		090BF0E4203A3A2400254C57 /* Enroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enroll.swift; sourceTree = "<group>"; };
+		090BF0E6203A6BF500254C57 /* Verify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verify.swift; sourceTree = "<group>"; };
+		090BF0E8203A79E500254C57 /* Recognize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recognize.swift; sourceTree = "<group>"; };
+		090BF0EA203A7F9400254C57 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		092C135C202427E6009F85B3 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		092C135E20242932009F85B3 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		092C13612026F0A5009F85B3 /* KMCSDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSDateManager.swift; sourceTree = "<group>"; };
@@ -204,6 +210,9 @@
 				090BF0E0203A39E900254C57 /* KairosAPI.swift */,
 				090BF0E2203A3A0800254C57 /* Detect.swift */,
 				090BF0E4203A3A2400254C57 /* Enroll.swift */,
+				090BF0E6203A6BF500254C57 /* Verify.swift */,
+				090BF0E8203A79E500254C57 /* Recognize.swift */,
+				090BF0EA203A7F9400254C57 /* Emotion.swift */,
 			);
 			path = Exploration;
 			sourceTree = "<group>";
@@ -463,7 +472,9 @@
 				09AC5A472033C1EE009C8EB9 /* KMCSCThemeProvider.swift in Sources */,
 				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,
 				09AC5A512033C30E009C8EB9 /* MFYAlbumTheme.swift in Sources */,
+				090BF0E7203A6BF500254C57 /* Verify.swift in Sources */,
 				092C135D202427E6009F85B3 /* Reusable.swift in Sources */,
+				090BF0EB203A7F9400254C57 /* Emotion.swift in Sources */,
 				09AC5A4D2033C2B6009C8EB9 /* KMCSCError.swift in Sources */,
 				09AC5A552033C423009C8EB9 /* Date+Extensions.swift in Sources */,
 				092C135F20242932009F85B3 /* PhotoCell.swift in Sources */,
@@ -475,6 +486,7 @@
 				092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */,
 				09AC5A592033DF8E009C8EB9 /* CGImagePropertyOrientation.swift in Sources */,
 				09AC5A4B2033C2A3009C8EB9 /* SmartALbumBuilder.swift in Sources */,
+				090BF0E9203A79E500254C57 /* Recognize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
