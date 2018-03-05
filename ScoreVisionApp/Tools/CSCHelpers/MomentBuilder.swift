@@ -16,7 +16,7 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
         switch self {
         default:
             return Promise { f, r in
-                f(CurationTheme(title: "nothing you call the wrong promise", logString: "use themesPromise", potentialAssets: [], uniqueID: ""))
+                f(CurationTheme(title: "nothing you call the wrong promise",subTitle: "", logString: "use themesPromise", potentialAssets: [], uniqueID: ""))
             }
         }
     }
@@ -60,19 +60,16 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
                     /// 2 check if moments has a title also it has more than one asset to work with
                     if let title = collection.localizedTitle,
                         !title.isEmpty,
-                        collection.estimatedAssetCount > 10 {
+                        collection.estimatedAssetCount > 0 {
                         
                         //Creating the Album theme title
                         //for this call just pass the collection.localIdentifier as period, later when we add a period parameter on this call will change that.
                         //  let albumTheme = MFYAlbumTheme(albumTitle: "Your Moments ", albumType: "", period: collection.localIdentifier)
                         
                         /// 3 fetch the assets and construct the CurationTheme
-                        var assets: [PHAsset] = []
                         let assetResult = PHAsset.fetchAssets(in: collection, options: nil)
-                        assetResult.enumerateObjects { asset, index, stop in
-                            assets.append(asset)
-                        }
-                        
+                        let assets = KMCSCThemeBuilder.filterSimilarTimeStapAssets(from: assetResult, compare: 5)
+
                         /// this will fix uniqueness
                         let uniqueID = title + " \(collection.localIdentifier)"
                         
@@ -81,7 +78,19 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
                         
                         // let momentTitle = self.constructMomentTitle(title)
                         
-                        let curationTheme = CurationTheme(title: "A Moment to Remember", logString: localyticsEventString, potentialAssets: assets, uniqueID: uniqueID)
+                        let collectionDay = KMCSRandomMomentDateManager.day(collection.startDate!).periodText
+                        let collectionMonth = KMCSRandomMomentDateManager.month(collection.startDate!).periodText
+                        let collectionYear = KMCSRandomMomentDateManager.year(collection.startDate!).periodText
+                        
+                        
+                        let season = KMCSRandomMomentDateManager.season(collection.startDate!).periodText
+                        
+//                        print("DATE \(collectionDay) - \(collectionMonth), \(collectionYear)")
+//                        print("DATE real \(collection.startDate!)")
+
+                        
+                        
+                        let curationTheme = CurationTheme(title: "A Moment to Remember", subTitle: "", logString: localyticsEventString, potentialAssets: assets, uniqueID: uniqueID)
                         momentsThemes.append(curationTheme)
                     }
                 }
@@ -118,7 +127,6 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
                         !title.isEmpty,
                         collection.estimatedAssetCount > 1 {
                         
-                        var assets: [PHAsset] = []
                         let options = PHFetchOptions.init()
                         
                         var predicates: [NSPredicate] = []
@@ -135,22 +143,22 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
                         options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
                         
                         let assetResult = PHAsset.fetchAssets(in: collection, options: nil)
-                        assetResult.enumerateObjects { asset, index, stop in
-                            assets.append(asset)
-                        }
-                        
-                        /// Construct the AlbumTheme
-                        /// title comes dynamically from album, we dont set it
-                        let mFYAlbumTheme = MFYAlbumTheme(albumThemeTitle: title, albumThemeType: subType.themeTitle, periodThemeTitle: period.periodThemeTitle)
+            
+                        let assets = KMCSCThemeBuilder.filterSimilarTimeStapAssets(from: assetResult, compare: 5)
                         
                         /// this will fix uniqueness
-                        let uniqueID = mFYAlbumTheme.mFYAlbumUniqueID + "\(collection.localIdentifier)"
+                        let uniqueID = title + "\(collection.localIdentifier)"
                         
                         /// this will help with localytics
                         let localyticsEventString = localytics?.eventString ?? ""
-                        let albumTitle = mFYAlbumTheme.albumThemeTitle ?? ""
+                    
+                        /// this will help with the location subtitle
+                        let locationTitle = self.constructMomentTitle(title)
                         
-                        let curationTheme = CurationTheme(title: albumTitle, logString: localyticsEventString, potentialAssets: assets, uniqueID: uniqueID)
+                       // if we are going to say just this from albums use subType.themeTitle
+                        // if we want moments support on ranges use period.periodThemeTitle
+                        
+                        let curationTheme = CurationTheme(title: period.periodThemeTitle, subTitle: locationTitle, logString: localyticsEventString, potentialAssets: assets, uniqueID: uniqueID)
                         momentsThemes.append(curationTheme)
                     }
                 }
@@ -165,7 +173,7 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
     private func constructMomentTitle(_ text: String) -> String {
         let stringComponents = text.components(separatedBy: "-")
         if let prefix = stringComponents.first {
-            return "Your Best Moment in \(prefix)"
+            return prefix
         } else {
             return text
         }

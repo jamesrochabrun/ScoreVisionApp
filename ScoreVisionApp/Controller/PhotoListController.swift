@@ -33,8 +33,6 @@ extension PhotoListController: PhotoPickerManagerDelegate {
         // here is our image from Library or camera
         photoImageView.image = image
         self.classificationLabel.text = "Analaysing..."
-
-        // KairosAPI.sharedInstance.exampleDetect(image)
         
         // do exampleVerify or exampleDetect
         guard let asset = asset else { return }
@@ -43,6 +41,7 @@ extension PhotoListController: PhotoPickerManagerDelegate {
                 self.classificationLabel.text = text
                 }.catch(execute: { err in
                     print("ERROR \(err)")
+                    self.classificationLabel.text = "No able to clasify"
                 })
         })
         manager.dismissPhotoPicker(animated: true, completion: nil)

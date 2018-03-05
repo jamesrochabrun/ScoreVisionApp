@@ -25,6 +25,8 @@
 		092C135D202427E6009F85B3 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135C202427E6009F85B3 /* Reusable.swift */; };
 		092C135F20242932009F85B3 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C135E20242932009F85B3 /* PhotoCell.swift */; };
 		092C13622026F0A5009F85B3 /* KMCSDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C13612026F0A5009F85B3 /* KMCSDateManager.swift */; };
+		094937CD204BCA8800774ACC /* MCSRandomMomentDateManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094937CC204BCA8800774ACC /* MCSRandomMomentDateManagerViewModel.swift */; };
+		0980CF43203B8005006CFD74 /* VerifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0980CF42203B8005006CFD74 /* VerifyController.swift */; };
 		09AC5A472033C1EE009C8EB9 /* KMCSCThemeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A462033C1EE009C8EB9 /* KMCSCThemeProvider.swift */; };
 		09AC5A492033C281009C8EB9 /* MomentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A482033C281009C8EB9 /* MomentBuilder.swift */; };
 		09AC5A4B2033C2A3009C8EB9 /* SmartALbumBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A4A2033C2A3009C8EB9 /* SmartALbumBuilder.swift */; };
@@ -74,6 +76,8 @@
 		092C135C202427E6009F85B3 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		092C135E20242932009F85B3 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		092C13612026F0A5009F85B3 /* KMCSDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSDateManager.swift; sourceTree = "<group>"; };
+		094937CC204BCA8800774ACC /* MCSRandomMomentDateManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCSRandomMomentDateManagerViewModel.swift; sourceTree = "<group>"; };
+		0980CF42203B8005006CFD74 /* VerifyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyController.swift; sourceTree = "<group>"; };
 		09AC5A462033C1EE009C8EB9 /* KMCSCThemeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMCSCThemeProvider.swift; sourceTree = "<group>"; };
 		09AC5A482033C281009C8EB9 /* MomentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentBuilder.swift; sourceTree = "<group>"; };
 		09AC5A4A2033C2A3009C8EB9 /* SmartALbumBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartALbumBuilder.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 			children = (
 				0907A8D82022DBA500E18BFA /* PhotoListController.swift */,
 				0911AC53203B5CBD0052F3A5 /* ObjectsController.swift */,
+				0980CF42203B8005006CFD74 /* VerifyController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -224,8 +229,9 @@
 			isa = PBXGroup;
 			children = (
 				092C13612026F0A5009F85B3 /* KMCSDateManager.swift */,
-				09AC5A462033C1EE009C8EB9 /* KMCSCThemeProvider.swift */,
 				09AC5A482033C281009C8EB9 /* MomentBuilder.swift */,
+				09AC5A462033C1EE009C8EB9 /* KMCSCThemeProvider.swift */,
+				094937CC204BCA8800774ACC /* MCSRandomMomentDateManagerViewModel.swift */,
 				09AC5A4A2033C2A3009C8EB9 /* SmartALbumBuilder.swift */,
 				09AC5A4C2033C2B6009C8EB9 /* KMCSCError.swift */,
 				09AC5A4E2033C2E4009C8EB9 /* KMCSCSortDescriptorProvider.swift */,
@@ -480,6 +486,8 @@
 				090BF0EB203A7F9400254C57 /* Emotion.swift in Sources */,
 				09AC5A4D2033C2B6009C8EB9 /* KMCSCError.swift in Sources */,
 				0911AC54203B5CBD0052F3A5 /* ObjectsController.swift in Sources */,
+				0980CF43203B8005006CFD74 /* VerifyController.swift in Sources */,
+				094937CD204BCA8800774ACC /* MCSRandomMomentDateManagerViewModel.swift in Sources */,
 				09AC5A552033C423009C8EB9 /* Date+Extensions.swift in Sources */,
 				092C135F20242932009F85B3 /* PhotoCell.swift in Sources */,
 				09AC5A492033C281009C8EB9 /* MomentBuilder.swift in Sources */,

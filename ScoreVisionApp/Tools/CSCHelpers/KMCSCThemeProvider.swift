@@ -41,6 +41,23 @@ enum KMCSCThemeBuilder {
         case getRandomThemes(qty: Int, localytics: KMCSCMFYLocaytics?)
         case getThemes(subType: PHAssetCollectionSubtype, period: KMCSDateManager, justFavorites: Bool, sortDescriptors: [SortProvider], localytics: KMCSCMFYLocaytics?)
     }
+    
+    /// filter assets with similar time intervals
+    static func filterSimilarTimeStapAssets(from assetResult: PHFetchResult<PHAsset>, compare interval: Double ) -> [PHAsset] {
+        
+        var previousTime: TimeInterval = 0
+        var filteredAssets: [PHAsset] = []
+        assetResult.enumerateObjects { asset, index, stop in
+            if asset.creationDate!.timeIntervalSince1970 - previousTime > interval {
+                filteredAssets.append(asset)
+              //  print("ADDED date \(asset.creationDate!)")
+            } else {
+               // print("NOT added with date \(asset.creationDate!)")
+            }
+            previousTime = asset.creationDate!.timeIntervalSince1970
+        }
+        return filteredAssets
+    }
 }
 
 

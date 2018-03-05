@@ -73,9 +73,7 @@ extension KMCSCThemeBuilder.SmartAlbumType: ThemeProvider {
                     reject(KMCSCError.noAlbumForSubtype(type: subType.themeTitle))
                     return
                 }
-                var assets: [PHAsset] = []
                 let options = PHFetchOptions.init()
-                
                 var predicates: [NSPredicate] = []
                 let periodPredicate = self.constructPeriodPredicate(from: period.period)
                 let subTypePredicate = subType.predicate
@@ -90,25 +88,8 @@ extension KMCSCThemeBuilder.SmartAlbumType: ThemeProvider {
                 let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
                 options.predicate = compound
                 options.sortDescriptors = sortDescriptors.map { $0.sortDescriptor }
-                
                 let assetResult = PHAsset.fetchAssets(in: assetCollection, options: options)
-                assetResult.enumerateObjects { asset, index, stop in
-                    
-                    // Baby step 1 -- TODO: whatever you want here for filter assets
-                    // conditions for filtering?
-                    // date?
-                    var assetDates = asset.creationDate!.rounded(minutes: 5, rounding: .round)
-                    assets.append(asset)
-//                    print("KMASSET height \(asset.pixelHeight)")
-//                    print("KMASSET width \(asset.pixelWidth)")
-//                    print("KMASSET location \(asset.location)")
-//                    print("KMASSET localIdentifier \(asset.localIdentifier)")
-                    print("KMASSET burstIdentifier \(asset.burstIdentifier)")
-                    print("KMASSET burstSelectionTypes \(asset.burstSelectionTypes)")
-                    print("KMASSET duration \(asset.duration)")
-                    print("KMASSET representsBurst \(asset.representsBurst)")
-                
-                }
+                let assets = KMCSCThemeBuilder.filterSimilarTimeStapAssets(from: assetResult, compare: 5)
   
                 /// Construct the AlbumTheme
                 let mFYAlbumTheme = MFYAlbumTheme(albumThemeTitle: nil, albumThemeType: subType.themeTitle, periodThemeTitle: period.periodThemeTitle)
@@ -117,7 +98,7 @@ extension KMCSCThemeBuilder.SmartAlbumType: ThemeProvider {
                 /// this is for Localytics
                 let localyticsEventString = localytics?.eventString ?? ""
                 
-                let curationTheme = CurationTheme(title: mFYAlbumTheme.mFYAlbumThemeTitle, logString: localyticsEventString, potentialAssets: assets, uniqueID: mFYAlbumTheme.mFYAlbumUniqueID)
+                let curationTheme = CurationTheme(title: mFYAlbumTheme.mFYAlbumThemeTitle,subTitle: "",logString: localyticsEventString, potentialAssets: assets, uniqueID: mFYAlbumTheme.mFYAlbumUniqueID)
                 
                 DispatchQueue.main.async {
                     if curationTheme.potentialAssets.count > 0 {

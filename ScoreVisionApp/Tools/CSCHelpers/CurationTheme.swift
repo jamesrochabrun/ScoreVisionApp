@@ -12,15 +12,17 @@ import Photos
 class CurationTheme: Equatable {
     
     let title: String
+    let subTitle: String
     let logString: String
     let potentialAssets: [PHAsset]
     let uniqueID: String
     
-    init(title: String, logString: String, potentialAssets: [PHAsset], uniqueID: String) {
+    init(title: String, subTitle: String, logString: String, potentialAssets: [PHAsset], uniqueID: String) {
         self.title = title
         self.logString = logString
         self.potentialAssets = potentialAssets
         self.uniqueID = uniqueID
+        self.subTitle = subTitle
     }
     
     static func ==(lhs: CurationTheme, rhs: CurationTheme) -> Bool {

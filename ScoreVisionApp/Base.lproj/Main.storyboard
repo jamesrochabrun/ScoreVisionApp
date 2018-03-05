@@ -89,7 +89,7 @@
                     <navigationItem key="navigationItem" id="S04-Kv-hZ4">
                         <barButtonItem key="rightBarButtonItem" title="Objects" id="Vz4-vH-d4Q">
                             <connections>
-                                <segue destination="r9R-Ej-auQ" kind="push" id="30h-Zs-dah"/>
+                                <segue destination="3gQ-hC-pRQ" kind="push" id="0BU-sI-vcG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -102,6 +102,140 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="479.19999999999999" y="133.5832083958021"/>
+        </scene>
+        <!--Verify View Controller-->
+        <scene sceneID="CZa-Js-PPM">
+            <objects>
+                <viewController id="3gQ-hC-pRQ" customClass="VerifyViewController" customModule="ScoreVisionApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uf5-wa-39n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="46" translatesAutoresizingMaskIntoConstraints="NO" id="mpj-gJ-VHo">
+                                <rect key="frame" x="49" y="107.5" width="277" height="452"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="fcj-dy-LNi">
+                                        <rect key="frame" x="0.0" y="0.0" width="277" height="120"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sasha5" translatesAutoresizingMaskIntoConstraints="NO" id="o1P-Q1-pwF">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="S5c-Xr-ifB"/>
+                                                    <constraint firstAttribute="width" constant="120" id="rdy-K0-Lo5"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sasha1" translatesAutoresizingMaskIntoConstraints="NO" id="TNO-Wf-IHD">
+                                                <rect key="frame" x="157" y="0.0" width="120" height="120"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="OeB-wA-rEG"/>
+                                                    <constraint firstAttribute="height" constant="120" id="peq-lm-f44"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="WxR-g8-2Eb" appends="YES" id="Slq-O7-kd0"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="jgA-bw-Nwx">
+                                        <rect key="frame" x="0.0" y="166" width="277" height="120"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sasha5" translatesAutoresizingMaskIntoConstraints="NO" id="Zik-Np-x9u">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="3uj-Zv-pMI"/>
+                                                    <constraint firstAttribute="width" constant="120" id="szZ-x7-dUY"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lea" translatesAutoresizingMaskIntoConstraints="NO" id="TPg-08-GD3">
+                                                <rect key="frame" x="157" y="0.0" width="120" height="120"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="MMV-ap-NhN"/>
+                                                    <constraint firstAttribute="width" constant="120" id="l4S-E6-avf"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="IiZ-DS-9ta" appends="YES" id="kHv-EZ-uw6"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="G5t-27-8DB">
+                                        <rect key="frame" x="0.0" y="332" width="277" height="120"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sasha5" translatesAutoresizingMaskIntoConstraints="NO" id="lVW-er-BIE">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="8az-HP-hYo"/>
+                                                    <constraint firstAttribute="height" constant="120" id="Obd-gG-MII"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sasha2" translatesAutoresizingMaskIntoConstraints="NO" id="aHz-cD-aO9">
+                                                <rect key="frame" x="157" y="0.0" width="120" height="120"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="nbS-bD-wjJ"/>
+                                                    <constraint firstAttribute="height" constant="120" id="yWi-Ou-3ev"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="9hQ-vv-2vn" appends="YES" id="4KH-d3-rYX"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the image on the right to verify" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fc3-4P-hQq">
+                                <rect key="frame" x="20" y="574.5" width="335" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mpj-gJ-VHo" firstAttribute="centerX" secondItem="Uf5-wa-39n" secondAttribute="centerX" id="0py-Ce-1wh"/>
+                            <constraint firstItem="fc3-4P-hQq" firstAttribute="leading" secondItem="IsU-Vd-LyW" secondAttribute="leading" constant="20" id="RMD-dW-8Gd"/>
+                            <constraint firstItem="fc3-4P-hQq" firstAttribute="top" secondItem="mpj-gJ-VHo" secondAttribute="bottom" constant="15" id="plF-Yv-l9C"/>
+                            <constraint firstItem="mpj-gJ-VHo" firstAttribute="centerY" secondItem="Uf5-wa-39n" secondAttribute="centerY" id="sES-SJ-ES2"/>
+                            <constraint firstItem="IsU-Vd-LyW" firstAttribute="trailing" secondItem="fc3-4P-hQq" secondAttribute="trailing" constant="20" id="xWB-A7-WbJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IsU-Vd-LyW"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uhQ-I0-QQu">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="xBW-DG-yFC">
+                            <connections>
+                                <segue destination="r9R-Ej-auQ" kind="push" id="4C0-O5-ZnL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nosasha" destination="TPg-08-GD3" id="9dr-l4-Y97"/>
+                        <outlet property="sasha1" destination="o1P-Q1-pwF" id="SWd-4I-Qse"/>
+                        <outlet property="sasha2" destination="TNO-Wf-IHD" id="R2S-qr-IOp"/>
+                        <outlet property="sasha3" destination="Zik-Np-x9u" id="uKQ-Y3-cQc"/>
+                        <outlet property="sasha5" destination="lVW-er-BIE" id="E50-1Q-1kb"/>
+                        <outlet property="sasha6" destination="aHz-cD-aO9" id="2YL-ee-toJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ss-t2-4ll" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WxR-g8-2Eb">
+                    <connections>
+                        <action selector="verify1:" destination="3gQ-hC-pRQ" id="il6-4H-yjR"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="IiZ-DS-9ta">
+                    <connections>
+                        <action selector="verify2:" destination="3gQ-hC-pRQ" id="43Q-Fo-J4S"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="9hQ-vv-2vn">
+                    <connections>
+                        <action selector="verify3:" destination="3gQ-hC-pRQ" id="JbO-yz-Rc2"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1153" y="134"/>
         </scene>
         <!--Objects View Controller-->
         <scene sceneID="e2a-DI-jxW">
@@ -220,7 +354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ft-GR-FHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239.2" y="132.68365817091455"/>
+            <point key="canvasLocation" x="1810" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fMd-Cb-Be9">
@@ -242,6 +376,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="lea" width="793" height="557"/>
         <image name="placeholder" width="1500" height="1500"/>
+        <image name="sasha1" width="768" height="960"/>
+        <image name="sasha2" width="2048" height="1366"/>
+        <image name="sasha5" width="1537" height="2049"/>
     </resources>
 </document>

@@ -21,8 +21,6 @@ final class ObjectsViewController: UIViewController {
     }()
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var classificationLabel: UILabel!
-
-    
     var titleTheme: String = ""
 
     override func viewDidLoad() {
@@ -33,7 +31,7 @@ final class ObjectsViewController: UIViewController {
     // MARK: get Themes
     @IBAction func getSelfies(_ sender: UIButton) {
         titleTheme = "Selfies"
-        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumSelfPortraits, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
+        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumSelfPortraits, period: .thisDay(yearsAgo: 0), justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
             self.updateCollection(theme)
             }.catch { error in
                 print("The error is \(error)")
@@ -42,11 +40,21 @@ final class ObjectsViewController: UIViewController {
     
     @IBAction func getAllPhotos(_ sender: UIButton) {
         titleTheme = "All photos"
-        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumUserLibrary, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
-            self.updateCollection(theme)
-            }.catch { error in
-                print("The error is \(error)")
+//        KMCSCThemeBuilder.SmartAlbumType.getTheme(subType: .smartAlbumUserLibrary, period: .ever, justFavorites: false, sortDescriptors: [.creationDate], localytics: nil).themePromise.then { theme in
+//            self.updateCollection(theme)
+//            }.catch { error in
+//                print("The error is \(error)")
+//        }'
+        
+        KMCSCThemeBuilder.MomentType.getRandomThemes(qty: 1, localytics: nil).themesPromise.then { theme in
+            self.updateUI(theme.first!)
         }
+        
+//        KMCSCThemeBuilder.MomentType.getThemes(subType: .smartAlbumUserLibrary, period: .lastWeekend, justFavorites: false, sortDescriptors: [.creationDate], localytics: .lastWeekend).themesPromise.then { themes in
+//
+//            self.updateUI(themes.first!)
+//                       // themes.map { self.updateUI( $0 ) }
+//        }
     }
     
     @IBAction func getFavorites(_ sender: UIButton) {
@@ -151,16 +159,19 @@ extension ObjectsViewController: UICollectionViewDelegate {
 extension ObjectsViewController {
     
     // helper for testing
-    private func updateUI(_ assets: [PHAsset]) {
+    private func updateUI(_ theme: CurationTheme) {
         // update the UI
-        self.countLabel.text = "\(titleTheme) count: = \(assets.count)"
-        self.photoListControllerDatasource.updateData(assets: assets)
+        self.photoListControllerDatasource.updateData(assets: theme.potentialAssets)
         self.photoCollectionView.reloadData()
+        self.countLabel.text = "\(theme.potentialAssets.count)"
+        print("The theme is logString \(theme.logString), potentialAssets count \(theme.potentialAssets.count), title \(theme.title), themesubtitle: \(theme.subTitle), id \(theme.uniqueID)")
+        print("##############################")
     }
     
     private func updateCollection(_ theme: CurationTheme) {
-        self.updateUI(theme.potentialAssets)
+        self.updateUI(theme)
     }
+
 }
 
 
