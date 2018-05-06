@@ -47,7 +47,7 @@ extension PhotoListController: PhotoPickerManagerDelegate {
         guard let asset = asset else { return }
         
         // do near dup stuff
-        self.alternatePhotos = self.getAlternatePhotosFor(asset: asset)
+        self.alternatePhotos = asset.getAlternatePhotos()
         
         // do Kairos stuff
         //performAnalysisOf(asset: asset)
@@ -196,8 +196,6 @@ extension PhotoListController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
@@ -222,9 +220,7 @@ extension PhotoListController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.alternatePhotos.count
-    }
-    
-
+    }    
 }
 
 

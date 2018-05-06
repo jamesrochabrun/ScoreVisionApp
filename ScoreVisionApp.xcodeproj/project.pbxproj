@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0905B3F4209EC73100C3679A /* PHAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905B3F3209EC73100C3679A /* PHAsset+Extension.swift */; };
 		0907A8D72022DBA500E18BFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8D62022DBA500E18BFA /* AppDelegate.swift */; };
 		0907A8D92022DBA500E18BFA /* PhotoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907A8D82022DBA500E18BFA /* PhotoListController.swift */; };
 		0907A8DC2022DBA500E18BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0907A8DA2022DBA500E18BFA /* Main.storyboard */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0905B3F3209EC73100C3679A /* PHAsset+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+Extension.swift"; sourceTree = "<group>"; };
 		0907A8D32022DBA500E18BFA /* ScoreVisionApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreVisionApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0907A8D62022DBA500E18BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0907A8D82022DBA500E18BFA /* PhotoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListController.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				09AC5A502033C30E009C8EB9 /* MFYAlbumTheme.swift */,
 				09AC5A522033C35A009C8EB9 /* CurationTheme.swift */,
 				09AC5A542033C423009C8EB9 /* Date+Extensions.swift */,
+				0905B3F3209EC73100C3679A /* PHAsset+Extension.swift */,
 			);
 			path = CSCHelpers;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				0907A8FE2022DC9A00E18BFA /* PhotoPickerManager.swift in Sources */,
 				09AC5A512033C30E009C8EB9 /* MFYAlbumTheme.swift in Sources */,
 				090BF0E7203A6BF500254C57 /* Verify.swift in Sources */,
+				0905B3F4209EC73100C3679A /* PHAsset+Extension.swift in Sources */,
 				092C135D202427E6009F85B3 /* Reusable.swift in Sources */,
 				090BF0EB203A7F9400254C57 /* Emotion.swift in Sources */,
 				09AC5A4D2033C2B6009C8EB9 /* KMCSCError.swift in Sources */,
