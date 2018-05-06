@@ -16,7 +16,6 @@ class PhotoListControllerDatasource: NSObject, UICollectionViewDataSource {
     private var titleObservations: [String?] = []
     private let imageManager = PHCachingImageManager()
 
-    
     init(assets: [PHAsset]) {
         self.assets = assets
         super.init()

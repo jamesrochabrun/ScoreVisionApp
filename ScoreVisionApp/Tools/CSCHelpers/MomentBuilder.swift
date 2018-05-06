@@ -83,7 +83,6 @@ extension KMCSCThemeBuilder.MomentType: ThemeProvider {
                         let collectionYear = KMCSRandomMomentDateManager.year(collection.startDate!).periodText
                         
                         
-                        
                         print("DATE \(collectionDay) - \(collectionMonth), \(collectionYear)")
                         print("DATE real \(collection.startDate!)")
 
