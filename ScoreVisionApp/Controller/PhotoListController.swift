@@ -47,7 +47,7 @@ extension PhotoListController: PhotoPickerManagerDelegate {
         guard let asset = asset else { return }
         
         // do near dup stuff
-        self.alternatePhotos = self.getAlternatePhotosFrom(asset: asset, comparing: 0)
+        self.alternatePhotos = self.getAlternatePhotosFor(asset: asset)
         
         // do Kairos stuff
         //performAnalysisOf(asset: asset)
@@ -79,116 +79,124 @@ extension PhotoListController: PhotoPickerManagerDelegate {
 
 extension PhotoListController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func getSimilarTimeStampAssets(from collectioAssets: [PHAsset], compare asset: PHAsset, interval: Double ) -> [PHAsset] {
+    func getSimilarTimeStampAssets(in assetFetchResult: PHFetchResult<PHAsset>, comparing asset: PHAsset, interval: Double ) -> [PHAsset] {
         
-        var filteredAssets: [PHAsset] = []
-        
-        collectioAssets.map {
-            print("AP  getSimilarTimeStampAssets date asset \($0.creationDate!)")
-        }
-        
-       var suffix: [PHAsset] = []
+        var suffix: [PHAsset] = []
         var prefix: [PHAsset] = []
+        var assets: [PHAsset] = []
         
-//        /// first get index of asset and to fo forward swap the prefix at the end of the array
-        if let index = collectioAssets.index(of: asset) {
-            prefix = Array(collectioAssets.prefix(upTo: index))
-            suffix = Array(collectioAssets.suffix(from: index))
+        let index = assetFetchResult.index(of: asset)
+        
+        for i in 0..<assetFetchResult.count {
+            let asset = assetFetchResult[i]
+            assets.append(asset)
         }
         
-        let alternateSuffix = self.getAlternateFrom(suffix: suffix, compare: asset, interval: interval)
-        let alternateprefix = self.getAlternateFrom(prefix: prefix, compare: asset, interval: interval)
+        prefix = Array(assets.prefix(upTo: index))
+        suffix = Array(assets.suffix(from: index))
         
-        /// now we need to add one by one the items here
-        for asset in alternateSuffix {
-            
-        }
+        let alternateSuffix = self.getAlternatesIn(suffix: suffix, compare: asset, interval: interval)
+        let alternatePrefix = self.getAlternatesIn(prefix: prefix, compare: asset, interval: interval)
         
-        
-        return filteredAssets
+        ///Alternate results?
+        return self.mergeFunction(alternateSuffix, alternatePrefix)
     }
     
-    private func getAlternateFrom(prefix: [PHAsset], compare asset: PHAsset, interval: Double) -> [PHAsset] {
+//    var arr1 = [1, 2, 3]
+//    var arr2 = [4, 5, 6, 7]
+//
+//    let initialCount = arr1.count
+//
+//    for i in 0..<arr2.count {
+//    if i < initialCount {
+//    arr1.insert(arr2[i], at: (2*i) + 1)
+//    } else {
+//    arr1.append(arr2[i])
+//    }
+//    }
+    
+    func mergeFunction<T>(_ one: [T], _ two: [T]) -> [T] {
+        let commonLength = min(one.count, two.count)
+        return zip(one, two).flatMap { [$0, $1] }
+            + one.suffix(from: commonLength)
+            + two.suffix(from: commonLength)
+    }
+    
+    private func getAlternatesIn(prefix: [PHAsset], compare asset: PHAsset, interval: Double) -> [PHAsset] {
         
         let staticAssetCreationTime = asset.creationDate?.timeIntervalSince1970
         var startingTime: TimeInterval = asset.creationDate!.timeIntervalSince1970
+        print("startingTime date - original from asset \(asset.creationDate!)")
         
-        print("startingTime date \(asset.creationDate!)")
         let _ = prefix.reversed().map {
-            print("AP prefix date asset \(String(describing: $0.creationDate))")
+            print("prefix date asset \(String(describing: $0.creationDate))")
         }
         
         var filteredAssets: [PHAsset] = []
         
-        for assetT in prefix.reversed() {
-            if startingTime - assetT.creationDate!.timeIntervalSince1970 < interval {
-                filteredAssets.append(assetT)
-                print("ADDED date \(assetT.creationDate!)")
+        for localAsset in prefix.reversed() {
+            if startingTime - localAsset.creationDate!.timeIntervalSince1970 < interval {
+                filteredAssets.append(localAsset)
+                print("added From prefix - \(localAsset.creationDate!)")
             } else {
-                print("NOT added with date \(assetT.creationDate!)")
+                print("not added From prefix - \(localAsset.creationDate!)")
             }
-            startingTime = assetT.creationDate!.timeIntervalSince1970
-
-            let rest = staticAssetCreationTime! - startingTime
-            if rest > 40 {
-                print("AP startingTime is \(assetT.creationDate!) staticAssetCreationTime is \(String(describing: asset.creationDate)) rest is  \(rest)")
+            startingTime = localAsset.creationDate!.timeIntervalSince1970
+            let minPeriodInterval = staticAssetCreationTime! - startingTime
+            if minPeriodInterval > 40 { //40 seconds window?
+                print("startingTime is \(localAsset.creationDate!) staticAssetCreationTime is \(String(describing: asset.creationDate)) rest is  \(minPeriodInterval)")
                 break
             }
         }
         return filteredAssets
     }
     
-    private func getAlternateFrom(suffix: [PHAsset], compare asset: PHAsset, interval: Double) -> [PHAsset] {
+    private func getAlternatesIn(suffix: [PHAsset], compare asset: PHAsset, interval: Double) -> [PHAsset] {
 
         let staticAssetCreationTime = asset.creationDate?.timeIntervalSince1970
         var startingTime: TimeInterval = asset.creationDate!.timeIntervalSince1970
+        print("startingTime date - original from asset \(asset.creationDate!)")
 
         let _ = suffix.map {
-            print("AP suufix date asset \(String(describing: $0.creationDate))")
+            print("sufix date asset \(String(describing: $0.creationDate))")
         }
         var filteredAssets: [PHAsset] = []
-
         for asset in suffix {
             if asset.creationDate!.timeIntervalSince1970 - startingTime < interval {
                 filteredAssets.append(asset)
-                print("ADDED date \(asset.creationDate!)")
+                print("added From sufix -\(asset.creationDate!)")
             } else {
-                print("NOT added with date \(asset.creationDate!)")
-
+                print("not added From sufix - \(asset.creationDate!)")
             }
             startingTime = asset.creationDate!.timeIntervalSince1970
-            if startingTime - staticAssetCreationTime! > 40 {
-                print("AP startingTime is \(startingTime) staticAssetCreationTime is \(staticAssetCreationTime!) rest is  \(startingTime - staticAssetCreationTime!)")
+            let minPeriodInterval = startingTime - staticAssetCreationTime!
+            if  minPeriodInterval > 40 { // 40 seconds window?
+                print("startingTime is \(startingTime) staticAssetCreationTime is \(staticAssetCreationTime!) rest is  \(startingTime - staticAssetCreationTime!)")
                 break
             }
         }
         return filteredAssets
     }
     
-    func getAlternatePhotosFrom(asset: PHAsset, comparing interval: Double) -> [PHAsset] {
-        
-        var collectionAssets: [PHAsset] = []
-        
-        /// get the collection of the asset to avoid fetching all photos or create a mmmm binary search in all assets
 
-        let collections = PHAssetCollection.fetchAssetCollectionsContaining(asset, with: .moment, options: nil)
+    func getAlternatePhotosFor(asset: PHAsset) -> [PHAsset] {
         
-        print("AP Collections Count \(collections.count)")
+        /// get the collection of the asset to avoid fetching all photos
+        let collectionFetchResult = PHAssetCollection.fetchAssetCollectionsContaining(asset, with: .moment, options: nil)
+        
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
-        for i in 0..<collections.count {
-            let collection = collections[i]
-            print("AP Collection \(String(describing: collection.localizedTitle))")
-            let assetsFetchResult = PHAsset.fetchAssets(in: collection, options: options)
-            for i in 0..<collection.estimatedAssetCount {
-                let asset = assetsFetchResult[i]
-                collectionAssets.append(asset)
-            }
-        }
+        guard let collection =  collectionFetchResult.firstObject else { return [] }
+        print("Collection Localized title \(String(describing: collection.localizedTitle))")
+        
+        let assetsFetchResult = PHAsset.fetchAssets(in: collection, options: options)
 
-        let filteredPhotos = self.getSimilarTimeStampAssets(from: collectionAssets, compare: asset, interval: 10)
+        let filteredPhotos = self.getSimilarTimeStampAssets(in: assetsFetchResult, comparing: asset, interval: 10)
         return filteredPhotos
     }
+    
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
